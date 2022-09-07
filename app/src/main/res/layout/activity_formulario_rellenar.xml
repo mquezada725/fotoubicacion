@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:padding="40dp"
+        tools:context=".FormularioRellenar">
+
+        <TextView
+            android:id="@+id/TxtPortada"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="2100dp"
+            android:fontFamily="@font/marvel"
+            android:text="Formulario Recorrido"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#C12F2F"
+            android:textColorHint="#B52525"
+            android:textColorLink="#8E1111"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Titulo"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#FAF9F9"
+            android:textColorHint="#FAF7F7"
+            android:textColorLink="#886D6D"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtFechaObtenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/marvel"
+            android:hint="DD/MM/YY"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#FAF8F8"
+            android:textColorHint="#F8F5F5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtAsociadoEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
+            android:fontFamily="@font/marvel"
+            android:text="Asociado A Evento"
+            android:textColor="#FAFAFA"
+            app:layout_constraintEnd_toStartOf="@+id/RgEventos"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtNumeroEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="220dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="N° De Evento"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="#F3EDED"
+            android:textColorHint="#F4EFEF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/SpSupervisor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="350dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/SpTecnicoReparacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/SpTecnicoReparacionOpcional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/SpZonaMantenimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="500dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtInicioActividadP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="570dp"
+            android:fontFamily="@font/marvel"
+            android:text="Fecha Hora Inicio Actividad"
+            android:textColor="#F1ECEC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtHoraInicioActividad"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtTerminoActividadP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="650dp"
+            android:fontFamily="@font/marvel"
+            android:text="Fecha Hora Termino Actividad"
+            android:textColor="#F1EDED"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtHoraTerminoActividad"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtTotalActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="710dp"
+            android:ems="10"
+            android:focusable="true"
+            android:fontFamily="@font/marvel"
+            android:inputType="time"
+            android:textAlignment="center"
+            android:textColorHint="#EDE8E8"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/SpClienteAfectado"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="790dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtTipoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="875dp"
+            android:fontFamily="@font/marvel"
+            android:text="Tipo Cliente"
+            android:textColor="#F4EFEF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/RgTipoCliente"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtLocalizacionFalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="950dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Localización Exacta Del Trabajo"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#F8F5F5"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtDistanciaOptica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1025dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Distancia Óptica"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#EFEBEB"
+            android:textColorHint="#F3EFEF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtLatitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1100dp"
+            android:fontFamily="@font/marvel"
+            android:text="Latitud"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtLongitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1175dp"
+            android:fontFamily="@font/marvel"
+            android:text="Longitud"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtRegistroFotoAntes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1240dp"
+            android:fontFamily="@font/marvel"
+            android:text="Registro Foto Antes"
+            android:textColor="#EDE1E1"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/RgFotoAntes"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtRegistroFotoFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1315dp"
+            android:fontFamily="@font/marvel"
+            android:text="Registro Foto Al Final"
+            android:textColor="#EDEBEB"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/RgFotoFinal"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtMedicionAntes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1410dp"
+            android:fontFamily="@font/marvel"
+            android:text="Registro De Mediciones Antes"
+            android:textColor="#F1EEEE"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/RgMedicionAntes"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtMedicionFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1485dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/marvel"
+            android:text="Registro Medición Final "
+            android:textColor="#ECE8E8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/RgMedicionFinal"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtCerrarModificacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1570dp"
+            android:fontFamily="@font/marvel"
+            android:text="Cerrar Modificación"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtAdjuntoArchivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1625dp"
+            android:layout_marginEnd="95dp"
+            android:fontFamily="@font/marvel"
+            android:text="Adjuntar Archivo"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/BtnAdjuntarArchivo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/BtnAdjuntarArchivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1610dp"
+            android:backgroundTint="#009688"
+            android:fontFamily="@font/marvel"
+            android:text="Agregar Archivo"
+            android:onClick="openFolderDialog"
+            android:textAlignment="center"
+            android:textColor="#F3F2F2"
+            android:textSize="16sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtAdjuntoArchivo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtDescripcionMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1790dp"
+            android:fontFamily="@font/marvel"
+            android:text="Descripción De Materiales"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtDecribirMateriales"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtDecribirMateriales"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1775dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indicar Materiales"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#EDEBEB"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtDescripcionMaterial"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtDescripcionTrabajo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1860dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/marvel"
+            android:text="Descripción Trabajo"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtDescribirTrabajo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtDescribirTrabajo"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1845dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indique Trabajo"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#F6F5F5"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtDescripcionTrabajo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtResolucionTrabajo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1910dp"
+            android:layout_marginEnd="19dp"
+            android:fontFamily="@font/marvel"
+            android:text="Resolución Trabajo"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtResolutivoTrabajo"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1895dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indique Resolución"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#F1EDED"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtResolucionTrabajo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtObservacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1980dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/marvel"
+            android:text="Observaciones"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtObservacionesTexto"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtObservacionesTexto"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1965dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indique Observación"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#EFEBEB"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtObservacion"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/BtnGuardarRecorrido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="2070dp"
+            android:backgroundTint="#009688"
+            android:fontFamily="@font/marvel"
+            android:text="Guardar Recorrido"
+            android:textAlignment="center"
+            android:textColor="#F1EEEE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtLatitudObtener"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1090dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Ej: 41.40338"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:textColorHint="#ECE7E7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/TxtLatitud"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtLongitudObtener"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1160dp"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Ej: 2.17403"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:textColorHint="#EFECEC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.955"
+            app:layout_constraintStart_toEndOf="@+id/TxtLongitud"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtPerdidaServicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:fontFamily="@font/marvel"
+            android:text="Perdida De Servicio"
+            android:textColor="#ECE7E7"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/RgPerdidaServicio"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TxtTiempoTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="725dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/marvel"
+            android:text="Tiempo Total De Actividad"
+            android:textColor="#EAE5E5"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/TxtTotalActividad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtHoraInicioActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="555dp"
+            android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/marvel"
+            android:hint="HH:MM"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#EAE6E6"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtInicioActividadP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/TxtHoraTerminoActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="635dp"
+            android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/marvel"
+            android:hint="HH:MM"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="#F4F0F0"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtTerminoActividadP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/RgEventos"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="160dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtAsociadoEvento"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdEventoSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textColor="#ECE8E8" />
+
+            <RadioButton
+                android:id="@+id/RdEventoNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textColor="#F6F5F5" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgPerdidaServicio"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="270dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtPerdidaServicio"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdPerdidaSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textColor="#FBF7F7"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/RdPerdidaNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textColor="#F3F1F1"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgTipoCliente"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="865dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtTipoCliente"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdUltimaMilla"
+                android:layout_width="90dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Ultima Milla"
+                android:textColor="#E8E1E1"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/RdTroncal"
+                android:layout_width="90dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Troncal"
+                android:textColor="#E8E6E6"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgFotoAntes"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="1220dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtRegistroFotoAntes"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdFotoAntesSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textColor="#EDEBEB"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="204dp"
+                tools:layout_editor_absoluteY="1291dp" />
+
+            <RadioButton
+                android:id="@+id/RdFotoAntesNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textColor="#EFE8E8"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="281dp"
+                tools:layout_editor_absoluteY="1291dp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgFotoFinal"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="1300dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtRegistroFotoFinal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdRegistroFotoFinalSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textColor="#EDE9E9"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="206dp"
+                tools:layout_editor_absoluteY="1363dp" />
+
+            <RadioButton
+                android:id="@+id/RdRegistroFotoFinalNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textColor="#F1EEEE"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="283dp"
+                tools:layout_editor_absoluteY="1363dp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgMedicionAntes"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="1375dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/TxtMedicionAntes"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdMedicionAntesSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textColor="#F3EFEF"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="170dp"
+                tools:layout_editor_absoluteY="1436dp" />
+
+            <RadioButton
+                android:id="@+id/RdMedicionAntesNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textColor="#EDE9E9"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="230dp"
+                tools:layout_editor_absoluteY="1436dp" />
+
+            <RadioButton
+                android:id="@+id/RdRegistroMedicionAntesNoAplica"
+                android:layout_width="70dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No Aplica"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="290dp"
+                tools:layout_editor_absoluteY="1436dp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgMedicionFinal"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="1460dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdMedicionFinalSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="149dp"
+                tools:layout_editor_absoluteY="1508dp" />
+
+            <RadioButton
+                android:id="@+id/RdMedicionFinalNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="214dp"
+                tools:layout_editor_absoluteY="1508dp" />
+
+            <RadioButton
+                android:id="@+id/RdMedicionFinalNoAplica"
+                android:layout_width="70dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No Aplica"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="279dp"
+                tools:layout_editor_absoluteY="1508dp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/RgCerrarModificacion"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="1555dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/RdCerrarModificacionSi"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="Si"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="206dp"
+                tools:layout_editor_absoluteY="1586dp" />
+
+            <RadioButton
+                android:id="@+id/RdCerrarModificacionNo"
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:fontFamily="@font/marvel"
+                android:text="No"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="277dp"
+                tools:layout_editor_absoluteY="1586dp" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
+

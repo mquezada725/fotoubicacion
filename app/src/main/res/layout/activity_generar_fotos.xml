@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondopantalla"
+    tools:context=".GenerarFotos">
+
+    <Button
+        android:id="@+id/BtnAccederCamara"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E91E63"
+        android:fontFamily="@font/marvel"
+        android:text="Tomar Fotografia"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/ImgFotoCaptura"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ImgFotoCaptura"
+        android:layout_width="300dp"
+        android:layout_height="278dp"
+        app:layout_constraintBottom_toTopOf="@+id/TxtUbicacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAccederCamara"
+        app:srcCompat="@drawable/camarafotoprevioformulario" />
+
+    <EditText
+        android:id="@+id/TxtUbicacion"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="405dp"
+        android:ems="10"
+        android:fontFamily="@font/marvel"
+        android:hint="Indique Ubicación"
+        android:inputType="textPersonName"
+        android:tag="Indique Ubicación"
+        android:textAlignment="center"
+        android:textColor="#FAF6F6"
+        android:textColorHint="#FDFDFD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/BtnRegresar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="565dp"
+        android:backgroundTint="#FF9800"
+        android:fontFamily="@font/marvel"
+        android:text="Regresar al Menu Principal"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/TxtComentario"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="@+id/TxtComentario"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/BtnGuardarFoto"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="645dp"
+        android:backgroundTint="#8BC34A"
+        android:fontFamily="@font/marvel"
+        android:text="Guardar Foto Tomada"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/BtnRegresar"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/BtnRegresar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/TxtComentario"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="485dp"
+        android:ems="10"
+        android:fontFamily="@font/marvel"
+        android:hint="Escriba Comentario (Opcional)"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColorHint="#ECE8E8"
+        app:layout_constraintEnd_toEndOf="@+id/TxtUbicacion"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/TxtUbicacion"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

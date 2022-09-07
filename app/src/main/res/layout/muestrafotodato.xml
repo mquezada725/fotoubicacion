@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:background="@null"
+            android:id="@+id/BtnFlowmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_baseline_more_vert_24"/>
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/ImgCargarFoto"
+            android:src="@drawable/imagenparalistado">
+        </ImageView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ImgCargarFoto"
+            android:text="@string/app_name"
+            android:layout_margin="10dp"
+            android:id="@+id/TxtUbicacion"
+            android:layout_marginLeft="25dp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ImgCargarFoto"
+            android:text="@string/app_name"
+            android:layout_margin="10dp"
+            android:id="@+id/TxtComentario"
+            android:layout_marginLeft="25dp">
+
+        </TextView>
+    </RelativeLayout>
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>
