@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,7 +79,9 @@ public class AdaptadorFotos extends RecyclerView.Adapter<AdaptadorFotos.viewHold
                                sqLiteDatabase = dbHelper.getReadableDatabase();
                                long eliminarFoto = sqLiteDatabase.delete(CREAR_TABLA_FOTOS,"ID_FOTO = " + listarfotos.getID_foto(),null  );
                                 if(eliminarFoto != -1){
-
+                                    Toast.makeText(Contenido,"Foto Eliminada",Toast.LENGTH_SHORT).show();
+                                    ModeloListado.remove(position);
+                                    notifyDataSetChanged();
                                 }
                                break;
                            default:
@@ -108,8 +111,6 @@ public class AdaptadorFotos extends RecyclerView.Adapter<AdaptadorFotos.viewHold
             UbicacionFotografia = itemView.findViewById(R.id.TxtUbicacion);
             ComentarioFotografia = itemView.findViewById(R.id.TxtComentario);
             FlowMenu = itemView.findViewById(R.id.BtnFlowmenu);
-
-
 
         }
     }

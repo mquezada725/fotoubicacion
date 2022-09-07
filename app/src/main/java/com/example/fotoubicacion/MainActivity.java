@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent IntentoFoto = new Intent(MainActivity.this, GenerarFotos.class);
                 startActivity(IntentoFoto);
+
             }
 
         });
