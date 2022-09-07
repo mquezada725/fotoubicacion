@@ -12,10 +12,8 @@ import androidx.annotation.Nullable;
 
 public class FormularioDB {
 
-
     private SQLiteDatabase DB;
     private DBHelper SQL;
-
 
     public FormularioDB(Context ContenidoFor){
         SQL = new DBHelper(ContenidoFor);
@@ -31,10 +29,32 @@ public class FormularioDB {
 
 
     //Metodo para crear INSERT
-    public void InsercionFormulario(String Titulo_Formulario, String Fecha, String RGEvento, String SupervisorSel, String TecnicoRep, String TecnicoRep2, String ZonaMant, String FechaHoraIni,
-    String FechaHoraTer, String FechatotalAct, String ClienteAfec,String TipCliente, String LocFalla, String DistOptica, String Latit, String Longt,
-    String RegFotoAntes,String RegFotoFinal, String RegMedAntes, String RegMedFinal, String CerrarMod,
-    String DescripMaterial, String DescripTrabajo, String ResolTrabajo, String Obser) throws Exception{
+    public void InsercionFormulario(
+            String Titulo_Formulario,
+            String Fecha,
+            String RGEvento,
+            String SupervisorSel,
+            String TecnicoRep,
+            String TecnicoRep2,
+            String ZonaMant,
+            String FechaHoraIni,
+            String FechaHoraTer,
+            String FechatotalAct,
+            String ClienteAfec,
+            String TipCliente,
+            String LocFalla,
+            String DistOptica,
+            String Latit,
+            String Longt,
+            String RegFotoAntes,
+            String RegFotoFinal,
+            String RegMedAntes,
+            String RegMedFinal,
+            String CerrarMod,
+            String DescripMaterial,
+            String DescripTrabajo,
+            String ResolTrabajo,
+            String Obser) throws Exception{
 
         try{
             String Solicitud = "INSERT INTO formulario_recorrido (" + "" +
@@ -62,8 +82,8 @@ public class FormularioDB {
                     "DESCRIPCIONMATERIAL," +
                     "DESCRIPCIONTRABAJO," +
                     "RESOLUCIONTRABAJO," +
-                    "OBSERVACION) VALUES (" + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
+                    "OBSERVACION) VALUES (" + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; //,?,?
+            DB = SQL.getWritableDatabase();
             DB.execSQL(Solicitud, new Object[]{
                             Titulo_Formulario,
                             Fecha,
@@ -91,7 +111,7 @@ public class FormularioDB {
                             ResolTrabajo,
                             Obser}
                     );
-
+            SQL.close();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

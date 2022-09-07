@@ -61,30 +61,19 @@ public class FormularioRellenar extends AppCompatActivity {
     Button IndicarFecha, AgregarArchivo, GuardarRecorrido;
 
     //Seleccion RadioGroup
-
-
-
     //Creamos Variables para tomar Fecha
 
     int Hora, Minutos, HoraT, MinutosT, HoraCompleto,MinutosCompleto;
     int Dia, Mes, Years, DiaT, MesT, YearsT, DiaI,MesI,YearsI;
 
-
-
     //Establecemos Comunicacion Con Sqlite
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_rellenar);
         getSupportActionBar().hide();
-
         //Metodo Para Agregar Archivo
         dbform = new FormularioDB(FormularioRellenar.this);
-
-
         //Establecemos Comunicacion Con los datos En la Parte Grafica Definida
         // Tipo EditText
         TituloRecorrido = findViewById(R.id.TxtTitulo);
