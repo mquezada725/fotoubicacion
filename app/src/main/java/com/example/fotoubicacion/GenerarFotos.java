@@ -4,19 +4,30 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.LocationRequest;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +35,10 @@ import com.example.fotoubicacion.Adaptadores.AdaptadorFotos;
 import com.example.fotoubicacion.DB.DBHelper;
 import com.example.fotoubicacion.DB.FotosDB;
 import com.example.fotoubicacion.Entidades.ListadoFoto;
+import com.example.fotoubicacion.Models.Fotos;
+
+
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,35 +50,38 @@ import java.nio.charset.StandardCharsets;
 
 public class GenerarFotos extends AppCompatActivity {
 
-    Button BtnCamaraTomar,BtnAvanzarFormulario, BtnRegresarMenu;
+    Button BtnCamaraTomar,BtnAvanzarFormulario, BtnRegresarMenu, BtnAgregarGaleria;
+    Uri uri;
     ImageView ImgCamara;
-    TextView UbicacionEscrita;
-    TextView Comentario;
+    TextView UbicacionEscrita,Comentario;
     OutputStream OutStream;
     FotosDB fotosDB;
+    Fotos fotosget;
     SQLiteDatabase Sqlsolicitud;
+    private static final int PLACE_PICKER_REQUEST = 1;
+    private final int GALLERY_REQ_CODE = 1000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generar_fotos);
-        BtnCamaraTomar= findViewById(R.id.BtnAccederCamara);
-        ImgCamara=findViewById(R.id.ImgFotoCaptura);
-        UbicacionEscrita=findViewById(R.id.TxtUbicacion);
+        BtnCamaraTomar = findViewById(R.id.BtnAccederCamara);
+        ImgCamara = findViewById(R.id.ImgFotoCaptura);
+        UbicacionEscrita = findViewById(R.id.TxtUbicacion);
         BtnAvanzarFormulario = findViewById(R.id.BtnGuardarFoto);
         BtnRegresarMenu = findViewById(R.id.BtnRegresar);
+        BtnAgregarGaleria = findViewById(R.id.BtnCargarGaleria);
         Comentario = findViewById(R.id.TxtComentario);
+
         getSupportActionBar().hide();
 
 
-        BtnRegresarMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent IntentoRegresoMenu = new Intent(GenerarFotos.this, MainActivity.class);
-                startActivity(IntentoRegresoMenu);
-            }
-        });
 
+        //Boton para obtnener ubicacion
+
+
+        //Boton que realiza validacion de foto, ubicacion y comentario y almacena la foto tomada
         BtnAvanzarFormulario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +124,13 @@ public class GenerarFotos extends AppCompatActivity {
                     }
                     FotosDB dbfoto = new FotosDB(GenerarFotos.this);
                     try {
-                        dbfoto.InsertarFotoDB("/Dcim",UbicacionEscrita.getText().toString(),Comentario.getText().toString());
+                        //dbfoto.InsertarFotoDB((ImgCamara.getDrawable()),UbicacionEscrita.getText().toString(),Comentario.getText().toString());
+                        Fotos fotosprueba = new Fotos();
+                        fotosprueba.setImagenTomada(Archivar.getPath());
+                        fotosprueba.setUbicacionSolicitada(UbicacionEscrita.getText().toString());
+                        fotosprueba.setComentarioFoto(Comentario.getText().toString());
+                        dbfoto.InsertarFotoDB(fotosprueba);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -117,16 +141,29 @@ public class GenerarFotos extends AppCompatActivity {
             }
         });
 
+        //Boton que inicia el metodo para comenzar la aplicacion de camara
         BtnCamaraTomar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     CamaraLanzar.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+
+            }
+        });
+
+        //Boton para tomar foto desde galeria
+        BtnAgregarGaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galeria = new Intent(Intent.ACTION_PICK);
+                galeria.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galeria, GALLERY_REQ_CODE);
             }
         });
     }
 
-
-    ActivityResultLauncher<Intent> CamaraLanzar = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    //Metodo para iniciar la ejecucion de la camara del dispositivo android
+    ActivityResultLauncher<Intent> CamaraLanzar = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode() == RESULT_OK){
@@ -138,4 +175,22 @@ public class GenerarFotos extends AppCompatActivity {
         }
 
     });
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+            if(requestCode == GALLERY_REQ_CODE){
+                ImgCamara.setImageURI(data.getData());
+            }
+
+        }
+    }
+
+
+
 }

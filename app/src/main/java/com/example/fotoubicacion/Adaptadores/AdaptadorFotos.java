@@ -1,12 +1,15 @@
 package com.example.fotoubicacion.Adaptadores;
 
-import static com.example.fotoubicacion.DB.DBHelper.CREAR_TABLA_FOTOS;
+import static com.example.fotoubicacion.DB.DBHelper.TABLA_FOTOS;
+import static com.example.fotoubicacion.DB.DBHelper.TABLA_FOTOS;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +31,7 @@ import com.example.fotoubicacion.EditarRecorrido;
 import com.example.fotoubicacion.Entidades.ListadoFoto;
 import com.example.fotoubicacion.R;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class AdaptadorFotos extends RecyclerView.Adapter<AdaptadorFotos.viewHolder> {
@@ -35,7 +39,8 @@ public class AdaptadorFotos extends RecyclerView.Adapter<AdaptadorFotos.viewHold
     int Dato_simple;
     ArrayList<ListadoFoto> ModeloListado;
     SQLiteDatabase sqLiteDatabase;
-
+    DBHelper dbHelper;
+    int id = 0;
 
 
     //Clase Constructor
@@ -55,12 +60,16 @@ public class AdaptadorFotos extends RecyclerView.Adapter<AdaptadorFotos.viewHold
         return new viewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
+    //carga de listado de fotos y opciones
     public void onBindViewHolder(@NonNull AdaptadorFotos.viewHolder holder, int position) {
         final ListadoFoto listarfotos = ModeloListado.get(position);
+
         byte[] imagen = listarfotos.getFoto_Tomada();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imagen,0,imagen.length);
-        holder.ImgCargarDatoFoto.setImageBitmap(bitmap);
+        //holder.ImgCargarDatoFoto.setImageBitmap(bitmap);
+        holder.ImgCargarDatoFoto.getDrawable();
         holder.UbicacionFotografia.setText(listarfotos.getUbicacionFoto());
         holder.ComentarioFotografia.setText(listarfotos.getComentario());
 
@@ -70,19 +79,23 @@ public class AdaptadorFotos extends RecyclerView.Adapter<AdaptadorFotos.viewHold
             public void onClick(View view) {
                 PopupMenu MenuVisual = new PopupMenu(Contenido,holder.FlowMenu);
                 MenuVisual.inflate(R.menu.menuflotante);
+                FotosDB fotodb = new FotosDB(Contenido);
                 MenuVisual.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                       switch (menuItem.getItemId()){
+                       switch (menuItem.getItemId()) {
                            case R.id.Elimina_foto:
                                DBHelper dbHelper = new DBHelper(Contenido);
-                               sqLiteDatabase = dbHelper.getReadableDatabase();
-                               long eliminarFoto = sqLiteDatabase.delete(CREAR_TABLA_FOTOS,"ID_FOTO = " + listarfotos.getID_foto(),null  );
-                                if(eliminarFoto != -1){
-                                    Toast.makeText(Contenido,"Foto Eliminada",Toast.LENGTH_SHORT).show();
-                                    ModeloListado.remove(position);
-                                    notifyDataSetChanged();
-                                }
+                               try {
+                                   dbHelper.getReadableDatabase();
+                                   fotodb.EliminarFoto(id);
+                                   ModeloListado.remove(id);
+                                   notifyDataSetChanged();
+                                   Toast.makeText(Contenido,"Foto Eliminada con Exito",Toast.LENGTH_SHORT).show();
+                               } catch (Exception e) {
+                                   e.printStackTrace();
+                               }
+                               dbHelper.close();
                                break;
                            default:
                                return false;

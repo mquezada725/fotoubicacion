@@ -1,76 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondopantalla"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnSincronizacion"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
-        android:backgroundTint="#A33C1C"
-        android:fontFamily="serif-monospace"
-        android:text="Sincronización"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/BtnEditarListado"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/BtnEditarListado"
-        app:layout_constraintTop_toBottomOf="@+id/BtnEditarListado"
-        app:layout_constraintVertical_bias="0.134" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/BtnEditarListado"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
-        android:backgroundTint="#009688"
-        android:fontFamily="serif-monospace"
-        android:text="Listado y Edición"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/BtnFormulario"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/BtnFormulario"
-        app:layout_constraintTop_toBottomOf="@+id/BtnFormulario"
-        app:layout_constraintVertical_bias="0.114" />
+        <Button
+            android:id="@+id/btnSincronizacion"
+            android:layout_width="330dp"
+            android:layout_height="47dp"
+            android:backgroundTint="#73797d"
+            android:fontFamily="serif-monospace"
+            android:text="Sincronización"
+            android:textColor="#ffd966"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnEditarListado"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/BtnEditarListado"
+            app:layout_constraintTop_toBottomOf="@+id/BtnEditarListado"
+            app:layout_constraintVertical_bias="0.134" />
 
-    <Button
-        android:id="@+id/BtnFormulario"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="#8BC34A"
-        android:fontFamily="serif-monospace"
-        android:text="Formulario De Datos"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/BtnNuevaFoto"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/BtnNuevaFoto"
-        app:layout_constraintTop_toBottomOf="@+id/BtnNuevaFoto"
-        app:layout_constraintVertical_bias="0.044" />
+        <Button
+            android:id="@+id/BtnEditarListado"
+            android:layout_width="330dp"
+            android:layout_height="47dp"
+            android:backgroundTint="#73797d"
+            android:fontFamily="serif-monospace"
+            android:text="Listado de fotos"
+            android:textColor="#ffd966"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnFormulario"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/BtnFormulario"
+            app:layout_constraintTop_toBottomOf="@+id/BtnFormulario"
+            app:layout_constraintVertical_bias="0.114" />
 
-    <Button
-        android:id="@+id/BtnRecorridoNuevo"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
-        android:backgroundTint="#5fbfff"
-        android:fontFamily="serif-monospace"
-        android:text="Generar Nuevo Recorrido"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.105"
-        app:strokeColor="@color/purple_500" />
+        <Button
+            android:id="@+id/BtnFormulario"
+            android:layout_width="330dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#73797d"
+            android:fontFamily="serif-monospace"
+            android:text="Formulario De Datos"
+            android:textColor="#ffd966"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnNuevaFoto"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="@+id/BtnNuevaFoto"
+            app:layout_constraintTop_toBottomOf="@+id/BtnNuevaFoto"
+            app:layout_constraintVertical_bias="0.044" />
+
+        <Button
+            android:id="@+id/BtnRecorridoNuevo"
+            android:layout_width="330dp"
+            android:layout_height="47dp"
+            android:backgroundTint="#73797d"
+            android:fontFamily="serif-monospace"
+            android:text="Generar Nuevo Recorrido"
+            android:textColor="#ffd966"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ImgLogoOpencode"
+            app:layout_constraintVertical_bias="0.105"
+            app:strokeColor="@color/purple_500" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ImgLogoOpencode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotationY="-17"
@@ -82,34 +98,41 @@
         app:layout_constraintVertical_bias="0.051"
         app:srcCompat="@drawable/logoopencode" />
 
-    <Button
-        android:id="@+id/BtnNuevaFoto"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="#727DBA"
-        android:fontFamily="serif-monospace"
-        android:text="Tomar Foto e Ubicación"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/BtnRecorridoNuevo"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/BtnRecorridoNuevo"
-        app:layout_constraintTop_toBottomOf="@+id/BtnRecorridoNuevo"
-        app:layout_constraintVertical_bias="0.032" />
+        <Button
+            android:id="@+id/BtnNuevaFoto"
+            android:layout_width="330dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#73797d"
+            android:fontFamily="serif-monospace"
+            android:text="Tomar Foto e Ubicación"
+            android:textColor="#ffd966"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnRecorridoNuevo"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="@+id/BtnRecorridoNuevo"
+            app:layout_constraintTop_toBottomOf="@+id/BtnRecorridoNuevo"
+            app:layout_constraintVertical_bias="0.032" />
 
-    <TextView
-        android:id="@+id/TxtEmpresa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="700dp"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="Empresa OpenCode 2022"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/TxtEmpresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="700dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Empresa OpenCode 2022"
+            android:textStyle="bold"
+            android:textColor="#FAF9F9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

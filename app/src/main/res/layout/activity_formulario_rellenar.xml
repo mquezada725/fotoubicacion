@@ -9,890 +9,513 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#add8e5"
+        android:background="@color/black"
         android:padding="40dp"
         tools:context=".FormularioRellenar">
 
         <TextView
             android:id="@+id/TxtPortada"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="2100dp"
+            android:layout_marginBottom="1800dp"
             android:fontFamily="@font/marvel"
             android:text="Formulario Recorrido"
             android:textAlignment="center"
-            android:textColor="#070707"
+            android:textColor="#F6F4F4"
             android:textColorHighlight="#C12F2F"
             android:textColorHint="#B52525"
             android:textColorLink="#8E1111"
-            android:textSize="24sp"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.051" />
 
         <EditText
             android:id="@+id/TxtTitulo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="Titulo"
+            android:backgroundTint="@color/white"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textColorLink="#886D6D"
-            android:textSize="18sp"
+            android:textColor="#F6F4F4"
+            android:textColorHint="#F1EEEE"
+            android:textColorLink="#FAF5F5"
+            android:textSize="17sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/TxtPortada" />
 
         <EditText
             android:id="@+id/TxtFechaObtenido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:ems="10"
             android:focusable="false"
             android:fontFamily="@font/marvel"
             android:hint="DD/MM/YY"
+            android:backgroundTint="@color/white"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#0C0C0C"
-            android:textColorHint="#121212"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtAsociadoEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
-            android:fontFamily="@font/marvel"
-            android:text="Asociado A Evento"
-            android:textColor="#101010"
-            app:layout_constraintEnd_toStartOf="@+id/RgEventos"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/FechaFormulario"
+            app:layout_constraintStart_toStartOf="@id/FechaFormulario"
+            app:layout_constraintTop_toBottomOf="@+id/FechaFormulario" />
 
         <EditText
             android:id="@+id/TxtNumeroEvento"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="60dp"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="N° De Evento"
+            android:backgroundTint="@color/white"
             android:inputType="number"
             android:textAlignment="center"
-            android:textColor="#131313"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtFechaObtenido"
+            app:layout_constraintStart_toStartOf="@+id/TxtFechaObtenido"
+            app:layout_constraintTop_toBottomOf="@+id/TxtFechaObtenido" />
 
         <Spinner
             android:id="@+id/SpSupervisor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
             android:textAlignment="center"
-            android:textColor="#0D4FA6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            app:layout_constraintEnd_toEndOf="@+id/Supervisor"
+            app:layout_constraintStart_toStartOf="@+id/Supervisor"
+            app:layout_constraintTop_toBottomOf="@+id/Supervisor" />
 
         <Spinner
             android:id="@+id/SpTecnicoReparacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
             android:textAlignment="center"
             android:textColor="#3a414a"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/Tecnico1"
+            app:layout_constraintStart_toStartOf="@+id/Tecnico1"
+            app:layout_constraintTop_toBottomOf="@+id/Tecnico1" />
 
         <Spinner
             android:id="@+id/SpTecnicoReparacionOpcional"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="450dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
             android:textAlignment="center"
+            android:backgroundTint="@color/white"
             android:textColor="#3a414a"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/Tecnico2"
+            app:layout_constraintStart_toStartOf="@+id/Tecnico2"
+            app:layout_constraintTop_toBottomOf="@+id/Tecnico2" />
 
         <Spinner
             android:id="@+id/SpZonaMantenimiento"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="500dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
             android:textAlignment="center"
             android:textColor="#3a414a"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/Zonamantenimiento"
+            app:layout_constraintStart_toStartOf="@+id/Zonamantenimiento"
+            app:layout_constraintTop_toBottomOf="@+id/Zonamantenimiento" />
 
         <TextView
             android:id="@+id/TxtInicioActividadP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="570dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Fecha Hora Inicio Actividad"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtHoraInicioActividad"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpZonaMantenimiento"
+            app:layout_constraintStart_toStartOf="@+id/SpZonaMantenimiento"
+            app:layout_constraintTop_toBottomOf="@+id/SpZonaMantenimiento" />
 
         <TextView
             android:id="@+id/TxtTerminoActividadP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="650dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Fecha Hora Termino Actividad"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtHoraTerminoActividad"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtHoraInicioActividad"
+            app:layout_constraintStart_toStartOf="@+id/TxtHoraInicioActividad"
+            app:layout_constraintTop_toBottomOf="@+id/TxtHoraInicioActividad" />
 
         <EditText
             android:id="@+id/TxtTotalActividad"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="710dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
             android:ems="10"
-            android:focusable="true"
+            android:focusable="false"
             android:fontFamily="@font/marvel"
             android:inputType="time"
             android:textAlignment="center"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHighlight="#F3EFEF"
+            android:textColorHint="#F1EEEE"
+            android:textColorLink="#EAE7E7"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTiempoTotal"
+            app:layout_constraintStart_toStartOf="@+id/TxtTiempoTotal"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTiempoTotal" />
 
         <Spinner
             android:id="@+id/SpClienteAfectado"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="790dp"
+            android:layout_marginTop="30dp"
             android:textAlignment="center"
-            android:textColor="#3a414a"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/Clienteafectado"
+            app:layout_constraintStart_toStartOf="@+id/Clienteafectado"
+            app:layout_constraintTop_toBottomOf="@+id/Clienteafectado" />
 
         <TextView
             android:id="@+id/TxtTipoCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="875dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Tipo Cliente"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/RgTipoCliente"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpClienteAfectado"
+            app:layout_constraintStart_toStartOf="@+id/SpClienteAfectado"
+            app:layout_constraintTop_toBottomOf="@+id/SpClienteAfectado" />
 
         <EditText
             android:id="@+id/TxtLocalizacionFalla"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="950dp"
+            android:layout_marginTop="60dp"
             android:ems="10"
+            android:backgroundTint="@color/white"
             android:fontFamily="@font/marvel"
             android:hint="Localización Exacta Del Trabajo"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColorHint="#121212"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/TxtDistanciaOptica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1025dp"
-            android:ems="10"
-            android:fontFamily="@font/marvel"
-            android:hint="Distancia Óptica"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtLatitud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1100dp"
-            android:fontFamily="@font/marvel"
-            android:text="Latitud"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtLongitud"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1175dp"
-            android:fontFamily="@font/marvel"
-            android:text="Longitud"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtRegistroFotoAntes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1240dp"
-            android:fontFamily="@font/marvel"
-            android:text="Registro Foto Antes"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/RgFotoAntes"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtRegistroFotoFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1315dp"
-            android:fontFamily="@font/marvel"
-            android:text="Registro Foto Al Final"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/RgFotoFinal"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtMedicionAntes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1410dp"
-            android:fontFamily="@font/marvel"
-            android:text="Registro De Mediciones Antes"
-            android:textColor="#121212"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/RgMedicionAntes"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtMedicionFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1485dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/marvel"
-            android:text="Registro Medición Final "
-            android:textColor="#121212"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/RgMedicionFinal"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/RgTipoCliente"
+            app:layout_constraintStart_toStartOf="@+id/RgTipoCliente"
+            app:layout_constraintTop_toBottomOf="@+id/RgTipoCliente" />
 
         <TextView
             android:id="@+id/TxtCerrarModificacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1570dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Cerrar Modificación"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtAdjuntoArchivo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1625dp"
-            android:layout_marginEnd="95dp"
-            android:fontFamily="@font/marvel"
-            android:text="Adjuntar Archivo"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/BtnAdjuntarArchivo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/BtnAdjuntarArchivo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1610dp"
-            android:backgroundTint="#009688"
-            android:fontFamily="@font/marvel"
-            android:onClick="openFolderDialog"
-            android:text="Agregar Archivo"
-            android:textAlignment="center"
-            android:textColor="#121212"
-            android:textSize="16sp"
-            app:cornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtAdjuntoArchivo"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtLocalizacionFalla"
+            app:layout_constraintStart_toStartOf="@+id/TxtLocalizacionFalla"
+            app:layout_constraintTop_toBottomOf="@+id/TxtLocalizacionFalla" />
 
         <TextView
             android:id="@+id/TxtDescripcionMaterial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1790dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Descripción De Materiales"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtDecribirMateriales"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/RgCerrarModificacion"
+            app:layout_constraintStart_toStartOf="@+id/RgCerrarModificacion"
+            app:layout_constraintTop_toBottomOf="@+id/RgCerrarModificacion" />
 
         <EditText
-            android:id="@+id/TxtDecribirMateriales"
-            android:layout_width="195dp"
+            android:id="@+id/TxtDescribirMateriales"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1775dp"
+            android:layout_marginTop="30dp"
             android:ems="10"
+            android:backgroundTint="@color/white"
             android:fontFamily="@font/marvel"
             android:hint="Indicar Materiales"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtDescripcionMaterial"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescripcionMaterial"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescripcionMaterial"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescripcionMaterial" />
 
         <TextView
             android:id="@+id/TxtDescripcionTrabajo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1860dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Descripción Trabajo"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtDescribirTrabajo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescribirMateriales"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescribirMateriales"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescribirMateriales" />
 
         <EditText
             android:id="@+id/TxtDescribirTrabajo"
-            android:layout_width="210dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1845dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="Indique Trabajo"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtDescripcionTrabajo"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescripcionTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescripcionTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescripcionTrabajo" />
 
         <TextView
             android:id="@+id/TxtResolucionTrabajo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1910dp"
-            android:layout_marginEnd="19dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Resolución Trabajo"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtResolutivoTrabajo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescribirTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescribirTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescribirTrabajo" />
 
         <EditText
             android:id="@+id/TxtResolutivoTrabajo"
-            android:layout_width="210dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1895dp"
+            android:layout_marginTop="30dp"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="Indique Resolución"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtResolucionTrabajo"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/TxtResolucionTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtResolucionTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtResolucionTrabajo" />
 
         <TextView
             android:id="@+id/TxtObservacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1980dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Observaciones"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtObservacionesTexto"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtResolutivoTrabajo" />
 
         <EditText
             android:id="@+id/TxtObservacionesTexto"
-            android:layout_width="210dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1965dp"
+            android:layout_marginTop="30dp"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="Indique Observación"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtObservacion"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:backgroundTint="@color/white"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtObservacion"
+            app:layout_constraintStart_toStartOf="@+id/TxtObservacion"
+            app:layout_constraintTop_toBottomOf="@+id/TxtObservacion" />
 
         <Button
             android:id="@+id/BtnGuardarRecorrido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="2070dp"
-            android:backgroundTint="#009688"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="#73797d"
             android:fontFamily="@font/marvel"
             android:text="Guardar Recorrido"
             android:textAlignment="center"
-            android:textColor="#121212"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/TxtResolutivoTrabajo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtResolutivoTrabajo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/TxtLatitudObtener"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1090dp"
-            android:ems="10"
-            android:fontFamily="@font/marvel"
-            android:hint="Ej: 41.40338"
-            android:inputType="numberDecimal"
-            android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/TxtLatitud"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/TxtLongitudObtener"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1160dp"
-            android:ems="10"
-            android:fontFamily="@font/marvel"
-            android:hint="Ej: 2.17403"
-            android:inputType="numberDecimal"
-            android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.955"
-            app:layout_constraintStart_toEndOf="@+id/TxtLongitud"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/TxtPerdidaServicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="290dp"
-            android:fontFamily="@font/marvel"
-            android:text="Perdida De Servicio"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/RgPerdidaServicio"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#ffd966"
+            android:textSize="20sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/TxtObservacionesTexto"
+            app:layout_constraintStart_toStartOf="@+id/TxtObservacionesTexto"
+            app:layout_constraintTop_toBottomOf="@+id/TxtObservacionesTexto" />
 
         <TextView
             android:id="@+id/TxtTiempoTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="725dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
             android:text="Tiempo Total De Actividad"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/TxtTotalActividad"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtHoraTerminoActividad"
+            app:layout_constraintStart_toStartOf="@+id/TxtHoraTerminoActividad"
+            app:layout_constraintTop_toBottomOf="@+id/TxtHoraTerminoActividad" />
 
         <EditText
             android:id="@+id/TxtHoraInicioActividad"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="555dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:ems="10"
+            android:backgroundTint="@color/white"
             android:focusable="false"
             android:fontFamily="@font/marvel"
             android:hint="HH:MM"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtInicioActividadP"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtInicioActividadP"
+            app:layout_constraintStart_toStartOf="@+id/TxtInicioActividadP"
+            app:layout_constraintTop_toBottomOf="@+id/TxtInicioActividadP" />
 
         <EditText
             android:id="@+id/TxtHoraTerminoActividad"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="635dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:ems="10"
+            android:backgroundTint="@color/white"
             android:focusable="false"
             android:fontFamily="@font/marvel"
             android:hint="HH:MM"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#121212"
-            android:textColorHint="#121212"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtTerminoActividadP"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/RgEventos"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="160dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtAsociadoEvento"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdEventoSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="#121212" />
-
-            <RadioButton
-                android:id="@+id/RdEventoNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="#121212" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/RgPerdidaServicio"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="270dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtPerdidaServicio"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdPerdidaSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="#121212"
-                android:textSize="16sp" />
-
-            <RadioButton
-                android:id="@+id/RdPerdidaNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="#121212"
-                android:textSize="16sp" />
-        </RadioGroup>
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTerminoActividadP"
+            app:layout_constraintStart_toStartOf="@+id/TxtTerminoActividadP"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTerminoActividadP" />
 
         <RadioGroup
             android:id="@+id/RgTipoCliente"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="865dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtTipoCliente"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdUltimaMilla"
-                android:layout_width="90dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Ultima Milla"
-                android:textColor="#121212"
-                android:textSize="16sp" />
+            android:layout_width="131dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:theme="@style/RadiobuttonRojo"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTipoCliente"
+            app:layout_constraintStart_toStartOf="@+id/TxtTipoCliente"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTipoCliente">
 
             <RadioButton
                 android:id="@+id/RdTroncal"
-                android:layout_width="90dp"
-                android:layout_height="26dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:fontFamily="@font/marvel"
                 android:text="Troncal"
-                android:textColor="#121212"
-                android:textSize="16sp" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/RgFotoAntes"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="1220dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtRegistroFotoAntes"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdFotoAntesSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="#121212"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                tools:layout_editor_absoluteX="204dp"
-                tools:layout_editor_absoluteY="1291dp" />
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="46dp"
+                tools:layout_editor_absoluteY="209dp" />
 
             <RadioButton
-                android:id="@+id/RdFotoAntesNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
+                android:id="@+id/RdUltimaMilla"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="#121212"
+                android:text="Ultima Milla"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                tools:layout_editor_absoluteX="281dp"
-                tools:layout_editor_absoluteY="1291dp" />
-        </RadioGroup>
+                android:textStyle="bold" />
 
-        <RadioGroup
-            android:id="@+id/RgFotoFinal"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="1300dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtRegistroFotoFinal"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdRegistroFotoFinalSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="#121212"
-                android:textSize="16sp"
-                tools:layout_editor_absoluteX="206dp"
-                tools:layout_editor_absoluteY="1363dp" />
-
-            <RadioButton
-                android:id="@+id/RdRegistroFotoFinalNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="#121212"
-                android:textSize="16sp"
-                tools:layout_editor_absoluteX="283dp"
-                tools:layout_editor_absoluteY="1363dp" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/RgMedicionAntes"
-            android:layout_width="200dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="1375dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/TxtMedicionAntes"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdMedicionAntesSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="#121212"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="170dp"
-                tools:layout_editor_absoluteY="1436dp" />
-
-            <RadioButton
-                android:id="@+id/RdMedicionAntesNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="#121212"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="230dp"
-                tools:layout_editor_absoluteY="1436dp" />
-
-            <RadioButton
-                android:id="@+id/RdRegistroMedicionAntesNoAplica"
-                android:layout_width="70dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No Aplica"
-                android:textAlignment="center"
-                android:textColor="#121212"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="290dp"
-                tools:layout_editor_absoluteY="1436dp" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/RgMedicionFinal"
-            android:layout_width="200dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="1460dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/RdMedicionFinalSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="#121212"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="149dp"
-                tools:layout_editor_absoluteY="1508dp" />
-
-            <RadioButton
-                android:id="@+id/RdMedicionFinalNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="#121212"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="214dp"
-                tools:layout_editor_absoluteY="1508dp" />
-
-            <RadioButton
-                android:id="@+id/RdMedicionFinalNoAplica"
-                android:layout_width="70dp"
-                android:layout_height="26dp"
-                android:fontFamily="@font/marvel"
-                android:text="No Aplica"
-                android:textColor="#121212"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="279dp"
-                tools:layout_editor_absoluteY="1508dp" />
         </RadioGroup>
 
         <RadioGroup
             android:id="@+id/RgCerrarModificacion"
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginTop="1555dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="30dp"
+            android:theme="@style/RadiobuttonRojo"
+            app:layout_constraintEnd_toEndOf="@+id/TxtCerrarModificacion"
+            app:layout_constraintStart_toStartOf="@+id/TxtCerrarModificacion"
+            app:layout_constraintTop_toBottomOf="@+id/TxtCerrarModificacion">
 
             <RadioButton
                 android:id="@+id/RdCerrarModificacionSi"
                 android:layout_width="60dp"
                 android:layout_height="26dp"
+                android:background="@color/white"
                 android:fontFamily="@font/marvel"
                 android:text="Si"
-                android:textColor="#121212"
+                android:textColor="@color/black"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="206dp"
                 tools:layout_editor_absoluteY="1586dp" />
 
@@ -900,13 +523,100 @@
                 android:id="@+id/RdCerrarModificacionNo"
                 android:layout_width="60dp"
                 android:layout_height="26dp"
+                android:background="@color/white"
                 android:fontFamily="@font/marvel"
                 android:text="No"
-                android:textColor="#121212"
+                android:textColor="@color/black"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="277dp"
                 tools:layout_editor_absoluteY="1586dp" />
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/Supervisor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Supervisor"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtNumeroEvento"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/TxtNumeroEvento"
+            app:layout_constraintTop_toBottomOf="@+id/TxtNumeroEvento" />
+
+        <TextView
+            android:id="@+id/Tecnico1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Tecnico de Reparación"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpSupervisor"
+            app:layout_constraintStart_toStartOf="@+id/SpSupervisor"
+            app:layout_constraintTop_toBottomOf="@+id/SpSupervisor" />
+
+        <TextView
+            android:id="@+id/Tecnico2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Tecnico de Reparacion(Opcional)"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpTecnicoReparacion"
+            app:layout_constraintStart_toStartOf="@+id/SpTecnicoReparacion"
+            app:layout_constraintTop_toBottomOf="@+id/SpTecnicoReparacion" />
+
+        <TextView
+            android:id="@+id/Zonamantenimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Zona De Mantenimiento"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpTecnicoReparacionOpcional"
+            app:layout_constraintStart_toStartOf="@+id/SpTecnicoReparacionOpcional"
+            app:layout_constraintTop_toBottomOf="@+id/SpTecnicoReparacionOpcional" />
+
+        <TextView
+            android:id="@+id/FechaFormulario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/marvel"
+            android:text="Fecha Formulario"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTitulo"
+            app:layout_constraintStart_toStartOf="@+id/TxtTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTitulo" />
+
+        <TextView
+            android:id="@+id/Clienteafectado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Cliente Afectado"
+            android:textColor="#F6F5F5"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTotalActividad"
+            app:layout_constraintStart_toStartOf="@+id/TxtTotalActividad"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTotalActividad" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

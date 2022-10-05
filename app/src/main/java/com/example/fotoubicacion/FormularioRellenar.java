@@ -1,23 +1,24 @@
 package com.example.fotoubicacion;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.documentfile.provider.DocumentFile;
-import androidx.recyclerview.widget.DiffUtil;
+import static android.content.ContentValues.TAG;
 
-import android.app.Activity;
+import static java.security.AccessController.getContext;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,59 +29,98 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.fotoubicacion.DB.DBHelper;
 import com.example.fotoubicacion.DB.FormularioDB;
+import com.example.fotoubicacion.Models.Bodegas;
+import com.example.fotoubicacion.Models.Datosform;
+import com.example.fotoubicacion.Models.Formulario;
+import com.example.fotoubicacion.Models.Operarios;
 
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.Format;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.AccessControlContext;
 import java.text.ParseException;
+import java.time.Duration;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.List;
 
 public class FormularioRellenar extends AppCompatActivity {
 
-    SQLiteDatabase sqLiteDb;
-    FormularioDB dbform;
-    DBHelper DB;
-    EditText TituloRecorrido, FechaRecorrido, LocalizacionFalla, DistanciaOptica, DescribirTrabajo, ResolucionTrabajo, ObservacionTrabajo, DescribirMateriales;
-    EditText Eventos;
-    EditText Latitud;
-    EditText Longitud;
-    EditText FechaHoraInicioActividad;
-    EditText FechaHoraTerminoActividad;
-    EditText TiempoTotalActividad;
-    RadioButton EventoSi, EventoNo, PerdidaServicioSi, PerdidaServicioNo, TipoClienteTroncal, TipoClienteUltimaMilla, RegistroAntesSi, RegistroAntesNo, RegistroFinalSi, RegistroFinalNo, RegistroMedicionAntesSi, RegistroMedicionAntesNo, RegistroMedicionAntesNoAplica, RegistroMedicionFinalSi, RegistroMedicionFinalNo, RegistroMedicionFinalNoAplica, CerrarModificacionSi, CerrarModificacionNo;
-    RadioGroup GrupoEventos, GrupoPerdidaServicio, GrupoTipoCliente, GrupoRegistroFotoAntes, GrupoRegistroFotoFinal, GrupoRegistroMedicionAntes, GrupoRegistroMedicionFinal, GrupoCerrarModificacion;
-    Spinner SupervisorTurno, TecnicoReparacion, TecnicoReparacion2, ZonaMantenimiento, ClienteAfectado;
-    Button IndicarFecha, AgregarArchivo, GuardarRecorrido;
 
-    //Seleccion RadioGroup
-    //Creamos Variables para tomar Fecha
+    //Url Conectado para envio de datos a servidor
+    private static final String URL2 = "http://192.168.0.167:50326/";
+    private static final String URLWEB = "http://captel_api.openpanel.cl/swagger/ui/index";
 
-    int Hora, Minutos, HoraT, MinutosT, HoraCompleto,MinutosCompleto;
-    int Dia, Mes, Years, DiaT, MesT, YearsT, DiaI,MesI,YearsI;
+
+    private RequestQueue queue;
+
 
     //Establecemos Comunicacion Con Sqlite
+    SQLiteDatabase sqLiteDb;
+
+    //
+    FormularioDB dbform;
+    DBHelper DB;
+
+
+    //Definicion de tipos datos entrantes
+    EditText TituloRecorrido, FechaRecorrido, LocalizacionFalla, DescribirTrabajo, ResolucionTrabajo,
+            ObservacionTrabajo, DescribirMateriales, Eventos, Latitud, Longitud, FechaHoraInicioActividad,
+            FechaHoraTerminoActividad, TiempoTotalActividad;
+
+
+    RadioButton TipoClienteTroncal, TipoClienteUltimaMilla, CerrarModificacionSi, CerrarModificacionNo;
+
+    RadioGroup GrupoTipoCliente, GrupoCerrarModificacion;
+
+    Spinner SupervisorTurno, TecnicoReparacion, TecnicoReparacion2, ZonaMantenimiento, ClienteAfectado;
+
+    Button GuardarRecorrido;
+    AlertDialog alertDialog;
+
+
+    //-Definir tipo de datos para adaptar fecha y hora
+    int Hora, Minutos, HoraT, MinutosT, HoraCompleto, MinutosCompleto;
+    int Dia, Mes, Years, DiaT, MesT, YearsT, DiaI, MesI, YearsI;
+    int mHour, mMinute, year, month, day;
+
+
+    //Metodo para evento Volley
+    private String rutSup = "", rutTecRep1 = "", rutTecRep2 = "";
+    private String Zonaman = "";
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_rellenar);
         getSupportActionBar().hide();
-        //Metodo Para Agregar Archivo
+        //Metodo de base de dato y Tipo Volley
         dbform = new FormularioDB(FormularioRellenar.this);
-        //Establecemos Comunicacion Con los datos En la Parte Grafica Definida
+        queue = Volley.newRequestQueue(FormularioRellenar.this);
+
+
+        //Establecemos Comunicacion Con los datos En la Parte Grafica
+
         // Tipo EditText
         TituloRecorrido = findViewById(R.id.TxtTitulo);
         FechaRecorrido = findViewById(R.id.TxtFechaObtenido);
         LocalizacionFalla = findViewById(R.id.TxtLocalizacionFalla);
-        DistanciaOptica = findViewById(R.id.TxtDistanciaOptica);
-        DescribirMateriales = findViewById(R.id.TxtDecribirMateriales);
+        DescribirMateriales = findViewById(R.id.TxtDescribirMateriales);
         DescribirTrabajo = findViewById(R.id.TxtDescribirTrabajo);
         ResolucionTrabajo = findViewById(R.id.TxtResolutivoTrabajo);
         ObservacionTrabajo = findViewById(R.id.TxtObservacionesTexto);
@@ -89,43 +129,23 @@ public class FormularioRellenar extends AppCompatActivity {
         TiempoTotalActividad = findViewById(R.id.TxtTotalActividad);
 
         // Tipo Botones
-        AgregarArchivo = findViewById(R.id.BtnAdjuntarArchivo);
         GuardarRecorrido = findViewById(R.id.BtnGuardarRecorrido);
 
         //Tipo Numero
         Eventos = findViewById(R.id.TxtNumeroEvento);
-        Latitud = findViewById(R.id.TxtLatitudObtener);
-        Longitud = findViewById(R.id.TxtLongitudObtener);
+
 
         //Tipo Radio Button
-        EventoSi = findViewById(R.id.RdEventoSi);
-        EventoNo = findViewById(R.id.RdEventoNo);
-        PerdidaServicioSi = findViewById(R.id.RdPerdidaSi);
-        PerdidaServicioNo = findViewById(R.id.RdPerdidaNo);
         TipoClienteTroncal = findViewById(R.id.RdTroncal);
         TipoClienteUltimaMilla = findViewById(R.id.RdUltimaMilla);
-        RegistroAntesSi = findViewById(R.id.RdFotoAntesSi);
-        RegistroAntesNo = findViewById(R.id.RdFotoAntesNo);
-        RegistroFinalSi = findViewById(R.id.RdRegistroFotoFinalSi);
-        RegistroFinalNo = findViewById(R.id.RdRegistroFotoFinalNo);
-        RegistroMedicionAntesSi = findViewById(R.id.RdMedicionAntesSi);
-        RegistroMedicionAntesNo = findViewById(R.id.RdMedicionAntesNo);
-        RegistroMedicionAntesNoAplica = findViewById(R.id.RdRegistroMedicionAntesNoAplica);
-        RegistroMedicionFinalSi = findViewById(R.id.RdMedicionFinalSi);
-        RegistroMedicionFinalNo = findViewById(R.id.RdMedicionFinalNo);
-        RegistroMedicionFinalNoAplica = findViewById(R.id.RdMedicionFinalNoAplica);
         CerrarModificacionSi = findViewById(R.id.RdCerrarModificacionSi);
         CerrarModificacionNo = findViewById(R.id.RdCerrarModificacionNo);
 
         //Tipo Radio Group
-        GrupoEventos = findViewById(R.id.RgEventos);
-        GrupoPerdidaServicio = findViewById(R.id.RgPerdidaServicio);
+
         GrupoTipoCliente = findViewById(R.id.RgTipoCliente);
-        GrupoRegistroFotoAntes = findViewById(R.id.RgFotoAntes);
-        GrupoRegistroFotoFinal = findViewById(R.id.RgFotoFinal);
-        GrupoRegistroMedicionAntes = findViewById(R.id.RgMedicionAntes);
-        GrupoRegistroMedicionFinal = findViewById(R.id.RgMedicionFinal);
         GrupoCerrarModificacion = findViewById(R.id.RgCerrarModificacion);
+
 
         //Tipo Spinner
         SupervisorTurno = findViewById(R.id.SpSupervisor);
@@ -133,8 +153,6 @@ public class FormularioRellenar extends AppCompatActivity {
         TecnicoReparacion2 = findViewById(R.id.SpTecnicoReparacionOpcional);
         ZonaMantenimiento = findViewById(R.id.SpZonaMantenimiento);
         ClienteAfectado = findViewById(R.id.SpClienteAfectado);
-
-        //Tipo Time
 
 
         //Llamar Metodos
@@ -144,11 +162,8 @@ public class FormularioRellenar extends AppCompatActivity {
         ListadoZonaMantenimiento();
         ListadoNombre();
 
-        //Metodo Calendario Para Tiempo
 
-
-        //Creamos Obtencion Fecha
-
+        //Metodo para obtener Fecha de creacion de formulario
         FechaRecorrido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +184,7 @@ public class FormularioRellenar extends AppCompatActivity {
             }
         });
 
+        //Metodo para obtener el inicio de la actividad del recorrido
         FechaHoraInicioActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,6 +214,7 @@ public class FormularioRellenar extends AppCompatActivity {
             }
         });
 
+        //Metodo para obtener la finalizacion de la actividad del recorrido
         FechaHoraTerminoActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,31 +249,7 @@ public class FormularioRellenar extends AppCompatActivity {
 
         //Mensajes Para Radio Button
 
-        GrupoEventos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int ChecarEvento) {
-                if (ChecarEvento == R.id.RdEventoSi) {
-                    Toast.makeText(FormularioRellenar.this, "Asociado A Evento = Si", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarEvento == R.id.RdEventoNo) {
-                    Toast.makeText(FormularioRellenar.this, "Asociado A Evento = No", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
 
-        GrupoPerdidaServicio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int ChecarServicio) {
-                if (ChecarServicio == R.id.RdPerdidaSi) {
-                    Toast.makeText(FormularioRellenar.this, "Perdida De Servicio = Si", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarServicio == R.id.RdPerdidaNo) {
-                    Toast.makeText(FormularioRellenar.this, "Perdida De Servicio = No", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
 
         GrupoTipoCliente.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -266,63 +259,6 @@ public class FormularioRellenar extends AppCompatActivity {
                     return;
                 } else if (ChecarCliente == R.id.RdUltimaMilla) {
                     Toast.makeText(FormularioRellenar.this, "Tipo De Cliente = Ultima Milla", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-
-        GrupoRegistroFotoAntes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int ChecarFotoAntes) {
-                if (ChecarFotoAntes == R.id.RdFotoAntesSi) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Foto Antes = Si", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarFotoAntes == R.id.RdFotoAntesNo) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Foto Antes = No", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-
-        GrupoRegistroFotoFinal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int ChecarFotoFinal) {
-                if (ChecarFotoFinal == R.id.RdRegistroFotoFinalSi) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Foto al Final = Si", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarFotoFinal == R.id.RdRegistroFotoFinalNo) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Foto al Final = No", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-
-        GrupoRegistroMedicionAntes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int ChecarMedicionAntes) {
-                if (ChecarMedicionAntes == R.id.RdMedicionAntesSi) {
-                    Toast.makeText(FormularioRellenar.this, "Registro De Medición Antes = Si", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarMedicionAntes == R.id.RdMedicionAntesNo) {
-                    Toast.makeText(FormularioRellenar.this, "Registro De Medición Antes = No", Toast.LENGTH_SHORT).show();
-                } else if (ChecarMedicionAntes == R.id.RdRegistroMedicionAntesNoAplica) {
-                    Toast.makeText(FormularioRellenar.this, "Registro De Medición Antes = No Aplica", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-
-        GrupoRegistroMedicionFinal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int ChecarMedicionFinal) {
-                if (ChecarMedicionFinal == R.id.RdMedicionFinalSi) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Medición Al Final = Si", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarMedicionFinal == R.id.RdMedicionFinalNo) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Medición Al Final = No", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (ChecarMedicionFinal == R.id.RdMedicionFinalNoAplica) {
-                    Toast.makeText(FormularioRellenar.this, "Registro Medición Al Final = No Aplica", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -346,8 +282,7 @@ public class FormularioRellenar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String ValidacionLetras = Latitud.getText().toString();
-                final String Validacionletas2 = Longitud.getText().toString();
+
                 Intent IntentoGuardarRecorrido = new Intent(FormularioRellenar.this, MainActivity.class);
 
                 if (TituloRecorrido.getText().toString().isEmpty()) {
@@ -358,27 +293,31 @@ public class FormularioRellenar extends AppCompatActivity {
                     Toast.makeText(FormularioRellenar.this, "Campo Fecha Vació", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (GrupoEventos.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Campo Asociado a Eventos Vació", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if (Eventos.getText().toString().isEmpty()) {
                     Toast.makeText(FormularioRellenar.this, "Campo N° Evento Vació", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (GrupoPerdidaServicio.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Campo Perdida Servicio Vació", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (SupervisorTurno.getSelectedItemPosition() == 0) {
+                if (rutSup.equals("")) {
                     Toast.makeText(FormularioRellenar.this, "Campo Supervisor Vacio", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (SupervisorTurno.getSelectedItemPosition() == 0) {
+                    Toast.makeText(FormularioRellenar.this, "Campo Supervisor 1 Vació", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (TecnicoReparacion.getSelectedItemPosition() == 0) {
-                    Toast.makeText(FormularioRellenar.this, "Campo Tecnico Reparación Vacio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FormularioRellenar.this, "Campo Tecnico Reparacion Vació", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (ZonaMantenimiento.getSelectedItemPosition() == 0) {
+                    Toast.makeText(FormularioRellenar.this, "Campo Zona Mantenimiento Vació", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (rutTecRep1.equals("")) {
+                    Toast.makeText(FormularioRellenar.this, "Campo Tecnico Reparación Vacio", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Zonaman.equals("")) {
                     Toast.makeText(FormularioRellenar.this, "Campo Zona Mantenimiento Vació", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -406,36 +345,8 @@ public class FormularioRellenar extends AppCompatActivity {
                     Toast.makeText(FormularioRellenar.this, "Campo Localización Falla Vació", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (DistanciaOptica.getText().toString().isEmpty()) {
-                    Toast.makeText(FormularioRellenar.this, "Campo Distancia Óptica Vació", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (Latitud.getText().toString().isEmpty()) {
-                    Toast.makeText(FormularioRellenar.this, "Campo Latitud Vació", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (Longitud.getText().toString().isEmpty()) {
-                    Toast.makeText(FormularioRellenar.this, "Campo Longitud Vació", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (GrupoRegistroFotoAntes.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Seleccione Opción En Foto Antes", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (GrupoRegistroFotoFinal.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Seleccione Opción En Foto Final", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (GrupoRegistroMedicionAntes.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Seleccione Una Opción En Medición Antes", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (GrupoRegistroMedicionFinal.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Seleccione Una Opción En Medición Final", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if (GrupoCerrarModificacion.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(FormularioRellenar.this, "Seleccione Una Opción En Cerrar Modificación", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FormularioRellenar.this, "Campo Cerrar Modificación Vacio", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (DescribirMateriales.getText().toString().isEmpty()) {
@@ -454,48 +365,59 @@ public class FormularioRellenar extends AppCompatActivity {
                     Toast.makeText(FormularioRellenar.this, "Campo Observación Vació", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    //String Radio Group
+                    int SelectCliente = GrupoTipoCliente.getCheckedRadioButtonId();
+                    RadioButton RbCliente = findViewById(SelectCliente);
+                    String EleccionCliente = RbCliente.getText().toString();
+
+                    int SelectCerrMod = GrupoCerrarModificacion.getCheckedRadioButtonId();
+                    RadioButton RbCerrarMod = findViewById(SelectCerrMod);
+                    String EleccionCerrModif = RbCerrarMod.getText().toString();
 
                     //FormularioDB dbFormulario = new FormularioDB(FormularioRellenar.this);
                     try {
-                        dbform.InsercionFormulario(
-                                TituloRecorrido.getText().toString(),
-                                FechaRecorrido.getText().toString(),
-                                String.valueOf(GrupoEventos.getCheckedRadioButtonId()),
-                                SupervisorTurno.toString(),
-                                TecnicoReparacion.toString(),
-                                TecnicoReparacion2.toString(),
-                                ZonaMantenimiento.toString(),
-                                FechaHoraInicioActividad.toString(),
-                                FechaHoraTerminoActividad.toString(),
-                                TiempoTotalActividad.toString(),
-                                ClienteAfectado.toString(),
-                                String.valueOf(GrupoTipoCliente.getCheckedRadioButtonId()),
-                                LocalizacionFalla.getText().toString(),
-                                DistanciaOptica.getText().toString(),
-                                Latitud.getText().toString(),
-                                Longitud.getText().toString(),
-                                String.valueOf(GrupoRegistroFotoAntes.getCheckedRadioButtonId()),
-                                String.valueOf(GrupoRegistroFotoFinal.getCheckedRadioButtonId()),
-                                String.valueOf(GrupoRegistroMedicionAntes.getCheckedRadioButtonId()),
-                                String.valueOf(GrupoRegistroMedicionFinal.getCheckedRadioButtonId()),
-                                String.valueOf(GrupoCerrarModificacion.getCheckedRadioButtonId()),
-                                DescribirMateriales.getText().toString(),
-                                DescribirTrabajo.getText().toString(),
-                                ResolucionTrabajo.getText().toString(),
-                                ObservacionTrabajo.getText().toString());
+                        Formulario form = new Formulario();
+                        form.setTitulo_Form(TituloRecorrido.getText().toString());
+                        form.setFecha_Form(FechaRecorrido.getText().toString());
+                        form.setNumero_Evento(Eventos.getText().toString());
+                        form.setSupervisor_Turno(rutSup);
+                        form.setTecnico_Reparacion(rutTecRep1);
+                        form.setTecnico_Reparacion(rutTecRep2);
+                        form.setZona_Mantenimiento(Zonaman);
+                        form.setFecha_Inicio(FechaHoraInicioActividad.getText().toString());
+                        form.setFecha_Termino(FechaHoraTerminoActividad.getText().toString());
+                        form.setTiempo_Total_Actividad(TiempoTotalActividad.getText().toString());
+                        form.setCliente_Afectado(ClienteAfectado.getSelectedItem().toString());
+                        form.setTipo_Cliente(EleccionCliente);
+                        form.setLocalizacion_Falla(LocalizacionFalla.getText().toString());
+                        form.setCerrar_Modificacion(EleccionCerrModif);
+                        form.setDescripcion_Materiales(DescribirMateriales.getText().toString());
+                        form.setDescripcion_Trabajo(DescribirTrabajo.getText().toString());
+                        form.setResolucion_Tabajo(ResolucionTrabajo.getText().toString());
+                        form.setObservaciones(ObservacionTrabajo.getText().toString());
+
+                        /*
+                                ELeccionFotoAntes,
+                                EleccionFotoFinal,
+                                */
+                        dbform.InsercionFormulario(form);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
+                    //Se genera mensaje de posteo de formulario y este es almacenado en la base local del telefono
+                    //PublicarPost();
                     startActivity(IntentoGuardarRecorrido);
                     Toast.makeText(FormularioRellenar.this, "Registro De Recorrido Guardado", Toast.LENGTH_SHORT).show();
                     LimpiarCuadro();
+                    return;
                 }
 
             }
         });
 
-        //Agregar Archivo
+
+        //Obtener datos de operarios y bodegas mediante metodo volley
+        OperariosObtenerVolley();
 
 
     }
@@ -505,7 +427,6 @@ public class FormularioRellenar extends AppCompatActivity {
 
     public void ListadoSupervisorTurno() {
         ArrayList<String> SupervisoresT = new ArrayList<>();
-        SupervisoresT.add("Supervisor");
         SupervisoresT.add("Juvenal Eduardo Rivas Gallardo");
         SupervisoresT.add("Ismael Ernesto Castillo Estrada");
         SupervisoresT.add("Luis Rodriguez");
@@ -535,7 +456,6 @@ public class FormularioRellenar extends AppCompatActivity {
 
     public void ListadoTecnicoReparacion() {
         ArrayList<String> TecnicoRepar = new ArrayList<>();
-        TecnicoRepar.add("Tecnico De Reparación");
         TecnicoRepar.add("Juvenal Eduardo Rivas Gallardo");
         TecnicoRepar.add("Ismael Ernesto Castillo Estrada");
         TecnicoRepar.add("Luis Rodriguez");
@@ -565,7 +485,6 @@ public class FormularioRellenar extends AppCompatActivity {
 
     public void ListadoTecnicoReparacionOpcional() {
         ArrayList<String> TecnicoReparOpc = new ArrayList<>();
-        TecnicoReparOpc.add("Tecnico Reparación 2 \n(Opcional)");
         TecnicoReparOpc.add("No Requiere");
         TecnicoReparOpc.add("Juvenal Eduardo Rivas Gallardo");
         TecnicoReparOpc.add("Ismael Ernesto Castillo Estrada");
@@ -596,7 +515,6 @@ public class FormularioRellenar extends AppCompatActivity {
 
     public void ListadoZonaMantenimiento() {
         ArrayList<String> ZonaMante = new ArrayList<>();
-        ZonaMante.add("Zona De Mantenimiento");
         ZonaMante.add("Concepción");
         ZonaMante.add("Talca");
         ZonaMante.add("Rancagua");
@@ -610,7 +528,6 @@ public class FormularioRellenar extends AppCompatActivity {
 
     public void ListadoNombre() {
         ArrayList<String> ListarClientes = new ArrayList<>();
-        ListarClientes.add("Cliente Afectado \nNombre Del Cliente ");
         ListarClientes.add("Ac Comunicaciones Chillán");
         ListarClientes.add("AnacondaWeb");
         ListarClientes.add("Anillo Silica");
@@ -715,9 +632,9 @@ public class FormularioRellenar extends AppCompatActivity {
     public void LimpiarCuadro() {
         TituloRecorrido.setText("");
         FechaRecorrido.setText("");
-        GrupoEventos.setSelected(false);
+        //GrupoEventos.setSelected(false);
         Eventos.setText("");
-        GrupoPerdidaServicio.clearCheck();
+        //GrupoPerdidaServicio.clearCheck();
         SupervisorTurno.setSelection(0);
         TecnicoReparacion.setSelection(0);
         TecnicoReparacion2.setSelection(0);
@@ -727,13 +644,13 @@ public class FormularioRellenar extends AppCompatActivity {
         ClienteAfectado.setSelection(0);
         GrupoTipoCliente.clearCheck();
         LocalizacionFalla.setText("");
-        DistanciaOptica.setText("");
-        Latitud.setText("");
-        Longitud.setText("");
-        GrupoRegistroFotoAntes.clearCheck();
-        GrupoRegistroFotoFinal.clearCheck();
-        GrupoRegistroMedicionAntes.clearCheck();
-        GrupoRegistroMedicionFinal.clearCheck();
+        //DistanciaOptica.setText("");
+        //Latitud.setText("");
+        //Longitud.setText("");
+        //GrupoRegistroFotoAntes.clearCheck();
+        //GrupoRegistroFotoFinal.clearCheck();
+        //GrupoRegistroMedicionAntes.clearCheck();
+        //GrupoRegistroMedicionFinal.clearCheck();
         GrupoCerrarModificacion.clearCheck();
         DescribirMateriales.setText("");
         DescribirTrabajo.setText("");
@@ -750,25 +667,236 @@ public class FormularioRellenar extends AppCompatActivity {
             Date endDate = simpleDateFormat.parse(Hora2);
             long difference = endDate.getTime() - startDate.getTime();
             if (difference < 0) {
-                Date dateMax = simpleDateFormat.parse("24:00");
-                Date dateMin = simpleDateFormat.parse("00:00");
+                Date dateMax = simpleDateFormat.parse(Hora1);
+                Date dateMin = simpleDateFormat.parse(Hora2);
                 difference = (dateMax.getTime() - startDate.getTime()) + (endDate.getTime() - dateMin.getTime());
             }
             int days = (int) (difference / (1000 * 60 * 60 * 24));
             int hours = (int) ((difference - (1000 * 60 * 60 * 24 * days)) / (1000 * 60 * 60));
             int min = (int) (difference - (1000 * 60 * 60 * 24 * days) - (1000 * 60 * 60 * hours)) / (1000 * 60);
-            Log.i("log_tag","Hours: " + hours + ", Mins: " + min);
+            Log.i("log_tag", "Hours: " + hours + ", Mins: " + min);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-
-
     }
 
 
+    //Creacion de obtencion de datos Almacenados en Base de datos de operarios y bodega
+    //Carga listado de operarios y bodega
+    private Datosform datosform;
 
+    private List<Operarios> listop = new ArrayList<>();
+    private List<Bodegas> listBod = new ArrayList<>();
+
+    public void OperariosObtenerVolley() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URLWEB + "api/Formulario/datosform", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //datosform.setOperarios( Gson.fromJson(response.getJSONArray("Operarios"), Datosform.Operarios.class));
+                    JSONArray j = response.getJSONArray("Operarios");
+                    ArrayList<String> TecnicoRepar = new ArrayList<>();
+                    ArrayList<String> SupervisoresT = new ArrayList<>();
+                    ArrayList<String> TecnicoReparOpc = new ArrayList<>();
+                    for (int i = 0; i < j.length(); i++) {
+                        try {
+                            Operarios op = new Operarios();
+                            JSONObject obj = j.getJSONObject(i);
+                            op.setRut(obj.getInt("Rut"));
+                            listop.add(op);
+                            SupervisoresT.add(obj.getString("Nombre"));
+                            TecnicoRepar.add(obj.getString("Nombre"));
+                            TecnicoReparOpc.add(obj.getString("Nombre"));
+                            //op.setNombre();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    /***/
+                    ArrayAdapter<String> ListadoR = new ArrayAdapter<>(FormularioRellenar.this, android.R.layout.simple_list_item_1, TecnicoRepar);
+                    TecnicoReparacion.setAdapter(ListadoR);
+
+                    ArrayAdapter<String> ListadoS = new ArrayAdapter<>(FormularioRellenar.this, android.R.layout.simple_list_item_1, SupervisoresT);
+                    SupervisorTurno.setAdapter(ListadoS);
+
+                    ArrayAdapter<String> ListadoRop = new ArrayAdapter<>(FormularioRellenar.this, android.R.layout.simple_list_item_1, TecnicoReparOpc);
+                    TecnicoReparacion2.setAdapter(ListadoRop);
+
+                    SupervisorTurno.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Operarios op = listop.get(position);
+                            rutSup = String.valueOf(op.getRut());
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+                    TecnicoReparacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Operarios op = listop.get(position);
+
+                            rutTecRep1 = String.valueOf(op.getRut());
+                            //Log.e("OP-->", ""+op.getRut());
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+                    TecnicoReparacion2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Operarios op = listop.get(position);
+
+                            rutTecRep2 = String.valueOf(op.getRut());
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                /**/
+                //JSONArray j = null;
+                ArrayList<String> ZonaMante = new ArrayList<>();
+                try {
+                    JSONArray j = response.getJSONArray("Bodegas");
+                    for (int i = 0; i < j.length(); i++) {
+                        Bodegas bg = new Bodegas();
+                        JSONObject obj = j.getJSONObject(i);
+                        bg.setCodigo((byte) obj.getInt("Codigo"));
+                        listBod.add(bg);
+                        ZonaMante.add(obj.getString("Nombre"));
+                    }
+
+                    ArrayAdapter<String> ListadoZona = new ArrayAdapter<String>(FormularioRellenar.this, android.R.layout.simple_list_item_1, ZonaMante);
+                    ZonaMantenimiento.setAdapter(ListadoZona);
+
+                    ZonaMantenimiento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Bodegas bdo = listBod.get(position);
+                            Zonaman = String.valueOf(bdo.getCodigo());
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(jsonObjectRequest);
+    }
+
+    private View.OnClickListener TotalActividad = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+            Integer month=c.get(Calendar.MONTH);
+            Integer day=c.get(Calendar.DAY_OF_MONTH);
+            Integer year=c.get(Calendar.YEAR);
+
+
+            if(FechaHoraInicioActividad.getText().length() >0){
+                DatePickerDialog datePickerDialog = new DatePickerDialog(FormularioRellenar.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(FormularioRellenar.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                if((month+1) > 9){
+                                    if(minute > 9){
+                                        FechaHoraTerminoActividad.setText(dayOfMonth + "/" + (month + 1) + "/" + year + " " + hourOfDay + ":" + minute);
+                                            }else{
+                                        FechaHoraTerminoActividad.setText(dayOfMonth + "/" + (month + 1) + "/" + year + " " + hourOfDay+":0"+minute);
+                                            }
+                                        }else{
+                                    if(minute > 9){
+                                        FechaHoraTerminoActividad.setText(dayOfMonth+"/0"+(month+1)+"/"+year+" "+ hourOfDay + ":" + minute);
+                                    }else{
+                                        FechaHoraTerminoActividad.setText(dayOfMonth+"/0"+(month+1)+"/"+year+" "+ hourOfDay+":0"+minute);
+                                            }
+                                    try {
+                                        String time1 = MesI+"-"+DiaI+"-"+YearsI+" "+Hora+":"+Minutos;
+                                        String time2 = month+"-"+dayOfMonth+"-"+year+" "+hourOfDay+":"+minute;
+                                        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+                                        Date date1 = format.parse(time1);
+                                        Date date2 = format.parse(time2);
+                                        long difference = date2.getTime() - date1.getTime();
+                                        long diffDays = (difference / (1000 * 60 * 60 * 24)) % 365;
+                                        long diffMinutes = difference / (60 * 1000) % 60;
+                                        long diffHours = difference / (60 * 60 * 1000) % 24;
+                                        if(diffHours < 0 || diffDays < 0){
+                                            alertDialog.setTitle("Alerta");
+                                            alertDialog.setMessage("La hora o fecha no puede ser menor a la de inicio");
+                                            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Aceptar", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                            alertDialog.dismiss();
+                                                        }
+                                                    });
+                                                    alertDialog.show();
+                                                    TiempoTotalActividad.setText("");
+                                                    return;
+                                                }
+                                                TiempoTotalActividad.setText(diffHours+" Horas"+" "+diffMinutes+" Minutos "+diffDays+" Dias" );
+                                            }catch (ParseException e){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }, HoraCompleto, MinutosCompleto, false);
+                                timePickerDialog.show();
+                            }
+                        }, YearsI, MesI, DiaI);
+                        datePickerDialog.show();
+                    }else{
+                        alertDialog.setTitle("Alerta");
+                        alertDialog.setMessage("Falta fecha hora de inicio actividad");
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                        alertDialog.show();
+                    }
+                }
+        };
 }
+
+
+
+
 
 
 

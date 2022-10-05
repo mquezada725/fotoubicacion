@@ -47,7 +47,7 @@ public class ListadoFoto {
         return Foto_Tomada;
     }
 
-    public void setFoto_Tomada(String foto_tomada) {
+    public void setFoto_Tomada(byte[] foto_tomada) {
         Foto_Tomada = Foto_Tomada;
     }
 }

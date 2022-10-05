@@ -18,8 +18,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLite) {
-        sqLite.execSQL(CREAR_TABLA_FORMULARIO);
-        sqLite.execSQL(CREAR_TABLA_FOTOS);
+        sqLite.execSQL(TABLA_FORMULARIO);
+        sqLite.execSQL(TABLA_FOTOS);
     }
 
     @Override
@@ -31,11 +31,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public static final String CREAR_TABLA_FORMULARIO = " CREATE TABLE formulario_recorrido (" +
+    public static final String TABLA_FORMULARIO = " CREATE TABLE formulario_recorrido (" +
             "ID_FORMULARIO INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "TITULO_FORMULARIO NVARCHAR (200) NOT NULL ," +
             "FECHA_FORMULARIO FECHA NOT NULL ," +
-            "ASOCIADOEVENTO TEXT NOT NULL ," +
+            "NUMEROEVENTO INTEGER NOT NULL," +
             "SUPERVISORTURNO TEXT NOT NULL," +
             "TECNICOREPARACION TEXT NOT NULL," +
             "TECNICOREPARACION2 TEXT ," +
@@ -46,23 +46,25 @@ public class DBHelper extends SQLiteOpenHelper {
             "CLIENTEAFECTADO TEXT NOT NULL," +
             "TIPOCLIENTE TEXT NOT NULL, " +
             "LOCALIZACIONFALLA NVARCHAR(150) NOT NULL," +
-            "DISTANCIAOPTICA NVARCHAR(200) NOT NULL," +
-            "LATITUD DECIMAL (10,5) NOT NULL," +
-            "LONGITUD DECIMAL (10,5) NOT NULL," +
-            "REGISTROFOTOANTES TEXT NOT NULL," +
-            "REGISTROFOTOFINAL TEXT NOT NULL," +
-            "REGISTROMEDICIONANTES TEXT NOT NULL," +
-            "REGISTROMEDICIONFINAL TEXT NOT NULL," +
             "CERRARMODIFICACION TEXT NOT NULL," +
             "DESCRIPCIONMATERIAL NVARCHAR (150)," +
             "DESCRIPCIONTRABAJO NVANCHAR (150)," +
             "RESOLUCIONTRABAJO NVARCHAR (150)," +
             "OBSERVACION NVARHCAR(150)" + ");";
 
-    public static final String CREAR_TABLA_FOTOS = " CREATE TABLE foto_listado (" +
+    public static final String TABLA_FOTOS = " CREATE TABLE foto_listado (" +
             "ID_FOTO INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-            "ID_FOTO_TOMADA BLOB NOT NULL,"+
+            "ID_FOTO_TOMADA VARCHAR(200) NOT NULL,"+
             "ID_UBICACION NVARCHAR (200)," +
             "ID_COMENTARIO NVANCHAR (150)" + ");";
 }
 
+//"DISTANCIAOPTICA NVARCHAR(200) NOT NULL," +
+//"LATITUD DECIMAL (10,5) NOT NULL," +
+//"LONGITUD DECIMAL (10,5) NOT NULL," +
+//"REGISTROFOTOANTES TEXT NOT NULL," +
+//"REGISTROFOTOFINAL TEXT NOT NULL," +
+//"REGISTROMEDICIONANTES TEXT NOT NULL," +
+//"REGISTROMEDICIONFINAL TEXT NOT NULL," +
+//"PERDIDASERVICIO TEXT NOT NULL," +
+//"ASOCIADOEVENTO TEXT NOT NULL ," +

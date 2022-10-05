@@ -6,22 +6,27 @@
         <entry key="..\:/FotoUbicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.22592592592592592" />
         <entry key="..\:/FotoUbicacion/app/src/main/res/layout/activity_main.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/Ignacio/Documents/Proyecto Opencode/matiaspractica/fotoubicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/drawable/ic_delete.xml" value="0.2595" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_editar_recorrido.xml" value="0.176" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulario_generar_parte2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulario_parte2.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.264" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.2" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulariogenerar.xml" value="0.4" />
-        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_generar_fotos.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_generar_fotos.xml" value="0.2892030848329049" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_menu_instrucciones.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_prueba_json.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_splash_screen.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/alerta_personalizadodb.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/color_spinner_layout.xml" value="0.225" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/muestrafotodato.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/pruebajson.xml" value="0.225" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/spinner_textcolor.xml" value="0.225" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/menu/menuflotante.xml" value="0.22592592592592592" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    
+    <style name="RadiobuttonRojo" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@android:color/holo_red_light </item>
+        <item name="android:textColorPrimary">@android:color/darker_gray </item>
+
+    </style>
 </resources>

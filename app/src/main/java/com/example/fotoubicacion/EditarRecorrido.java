@@ -1,6 +1,6 @@
 package com.example.fotoubicacion;
 
-import static com.example.fotoubicacion.DB.DBHelper.CREAR_TABLA_FOTOS;
+import static com.example.fotoubicacion.DB.DBHelper.TABLA_FOTOS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,9 +22,10 @@ import java.util.List;
 
 public class EditarRecorrido extends AppCompatActivity {
 
-
+    // Llamar clases de base de datos locales
     DBHelper BaseFotos;
     SQLiteDatabase sqLiteDatabase;
+    // Creacion adaptador para fotos tomadas
     AdaptadorFotos adfotos;
     RecyclerView ListaVista;
 
@@ -46,14 +47,15 @@ public class EditarRecorrido extends AppCompatActivity {
 
     private void DisplayListado() {
         sqLiteDatabase = BaseFotos.getReadableDatabase();
-        Cursor Curseado = sqLiteDatabase.rawQuery(" SELECT * FROM foto_listado" ,null);
+        Cursor Curseado = sqLiteDatabase.rawQuery(" SELECT * FROM foto_listado " ,null);
         ArrayList<ListadoFoto> ModeloFoto = new ArrayList<>();
         while (Curseado.moveToNext()){
             int IDtomar = Curseado.getInt(0);
             byte[]ImagenFoto = Curseado.getBlob(1);
             String UbicacionEscrita = Curseado.getString(2);
             String ComentarioOp = Curseado.getString(3);
-            ModeloFoto.add(new ListadoFoto(IDtomar,ImagenFoto,UbicacionEscrita,ComentarioOp));
+            ModeloFoto.add(new ListadoFoto(IDtomar,ImagenFoto,"Ubicación Fotografia : "+UbicacionEscrita,
+                    "Comentario Foto : " +ComentarioOp));
 
         }
         Curseado.close();
