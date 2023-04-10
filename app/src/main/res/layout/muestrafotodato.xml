@@ -13,20 +13,9 @@
         android:layout_height="80dp"
         android:background="@color/black">
 
-        <ImageButton
-            android:id="@+id/BtnFlowmenu"
-            android:layout_width="48dp"
-            android:layout_height="59dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="0dp"
-            android:background="@color/black"
-            android:src="@drawable/ic_delete" />
 
         <ImageView
-            android:id="@+id/ImgCargarFoto"
+            android:id="@+id/ImgFotoReducida"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
@@ -44,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/ImgCargarFoto"
+            android:layout_toRightOf="@+id/ImgFotoReducida"
             android:fontFamily="@font/marvel"
             android:text="@string/app_name"
             android:textColor="@color/white"
@@ -63,7 +52,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/ImgCargarFoto"
+            android:layout_toRightOf="@+id/ImgFotoReducida"
             android:fontFamily="@font/marvel"
             android:text="@string/app_name"
             android:textColor="@color/white"
@@ -71,6 +60,22 @@
             android:textStyle="bold">
 
         </TextView>
+
+        <TextView
+            android:id="@+id/idfoto"
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="0dp"            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/pathfoto"
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="0dp"            >
+        </TextView>
+
+
     </RelativeLayout>
 
 

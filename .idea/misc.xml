@@ -3,8 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/activity_editar_recorrido.xml" value="0.25787037037037036" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.25" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/activity_fullscreen.xml" value="0.25" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/activity_generar_fotos.xml" value="0.1" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/edit_text_border.xml" value="0.2361111111111111" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/edittextborder.xml" value="0.2361111111111111" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/muestrafotodato.xml" value="0.25787037037037036" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/spinner_item_formateado.xml" value="0.20969202898550723" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/layout/spinner_item_supervisorturno.xml" value="0.25787037037037036" />
+        <entry key="..\:/Android/FotoUbicacion/app/src/main/res/menu/menuflotante.xml" value="0.1" />
         <entry key="..\:/FotoUbicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.22592592592592592" />
         <entry key="..\:/FotoUbicacion/app/src/main/res/layout/activity_main.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/AlbertoMeneses/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.25787037037037036" />
         <entry key="..\:/Users/Ignacio/Documents/Proyecto Opencode/matiaspractica/fotoubicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/drawable/ic_delete.xml" value="0.2595" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_editar_recorrido.xml" value="0.176" />
@@ -12,7 +25,7 @@
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulario_parte2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulario_rellenar.xml" value="0.2" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_formulariogenerar.xml" value="0.4" />
-        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_generar_fotos.xml" value="0.2892030848329049" />
+        <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_generar_fotos.xml" value="0.31916285153695223" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_menu_instrucciones.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mquez/AndroidStudioProjects/FotoUbicacion/app/src/main/res/layout/activity_prueba_json.xml" value="0.22592592592592592" />

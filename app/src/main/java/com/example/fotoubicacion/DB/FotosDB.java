@@ -1,27 +1,23 @@
 package com.example.fotoubicacion.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
 
-import com.example.fotoubicacion.Entidades.ListadoFoto;
+import com.example.fotoubicacion.Entidades.FotosModels;
 import com.example.fotoubicacion.Models.Fotos;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FotosDB {
     private SQLiteDatabase DbFotos;
     private DBHelper DBHelp;
-    private ByteArrayOutputStream byteArrayOutputStream;
-
 
     public FotosDB(Context Contenido){
             DBHelp = new DBHelper(Contenido);
     }
-
 
     public void Abertura(){
         DbFotos = DBHelp.getWritableDatabase();
@@ -35,15 +31,16 @@ public class FotosDB {
         int Ultimo_id = 0;
 
         try{
-
             String Solicitud = "INSERT INTO foto_listado ( " +
                     "ID_FOTO_TOMADA, " +
+                    "IMAGEN_REAL, " +
                     "ID_UBICACION, " +
                     "ID_COMENTARIO) " +
-                    "VALUES (?,?,?)";
+                    "VALUES (?,?,?,?)";
             DbFotos = DBHelp.getWritableDatabase();
             DbFotos.execSQL(Solicitud, new Object[]{
-                    fotos.getImagenTomada(),
+                    fotos.getPathImagen(),
+                    fotos.getImagenReal(),
                     fotos.getUbicacionSolicitada(),
                     fotos.getComentarioFoto()}
             );
@@ -54,8 +51,8 @@ public class FotosDB {
         }
     }
 
-    public List<ListadoFoto> CargarListadoFoto(int id_fotos, byte[] foto_tomada, String UbicacionFoto, String ComentarioFoto) throws Exception {
-        List<ListadoFoto> CargarFotos =  null;
+    public List<FotosModels> CargarListadoFoto(int id_fotos, String foto_tomada, byte[] imagen_real, String UbicacionFoto, String ComentarioFoto) throws Exception {
+        List<FotosModels> CargarFotos =  null;
         try{
             String SelectList = "SELECT * FROM foto_listado WHERE ID_FOTO_TOMADA = ? AND ID_UBICACION = ? AND ID_COMENTARIO = ?";
             String [] SelectionArgs = new String[]{String.valueOf(id_fotos), String.valueOf(foto_tomada),UbicacionFoto,ComentarioFoto};
@@ -63,9 +60,10 @@ public class FotosDB {
             CargarFotos = new ArrayList<>();
             if(Curseado.moveToFirst()){
                 while(!Curseado.isAfterLast()){
-                    ListadoFoto ItemSeleccionado = new ListadoFoto(id_fotos,foto_tomada,UbicacionFoto,ComentarioFoto);
+                    FotosModels ItemSeleccionado = new FotosModels(id_fotos,foto_tomada,imagen_real,UbicacionFoto,ComentarioFoto);
                     ItemSeleccionado.setID_foto(Curseado.getInt(Curseado.getColumnIndexOrThrow("ID_FOTO")));
-                    ItemSeleccionado.setFoto_Tomada(Curseado.getBlob(Curseado.getColumnIndexOrThrow("FOTO_TOMADA")));
+                    ItemSeleccionado.setPath_Foto(Curseado.getString(Curseado.getColumnIndexOrThrow("FOTO_TOMADA")));
+                    ItemSeleccionado.setImagen_Real(Curseado.getBlob(Curseado.getColumnIndexOrThrow("IMAGEN_REAL")));
                     ItemSeleccionado.setUbicacionFoto(Curseado.getString(Curseado.getColumnIndexOrThrow("ID_UBICACION")));
                     ItemSeleccionado.setComentario(Curseado.getString(Curseado.getColumnIndexOrThrow("ID_COMENTARIO")));
                     CargarFotos.add(ItemSeleccionado);
@@ -82,7 +80,7 @@ public class FotosDB {
             boolean seleccion = false;
             SQLiteDatabase dbfotoelegir = DBHelp.getWritableDatabase();
         try{
-            dbfotoelegir.execSQL("DELETE FROM foto_listado WHERE ID_FOTO_TOMADA = ?");
+            dbfotoelegir.execSQL("DELETE FROM foto_listado WHERE ID_FOTO ="+String.valueOf(id));
             seleccion = true;
 
         }catch (Exception Error){
@@ -105,7 +103,8 @@ public class FotosDB {
             if(cursor != null && cursor.moveToFirst()){
                 while (!cursor.isAfterLast()) {
                     Fotos fotosDp = new Fotos();
-                    fotosDp.setImagenTomada(cursor.getString(cursor.getColumnIndexOrThrow("ID_FOTO_TOMADA")));
+                    fotosDp.setPathImagen(cursor.getString(cursor.getColumnIndexOrThrow("ID_FOTO_TOMADA")));
+                    fotosDp.setImagenReal(cursor.getBlob(cursor.getColumnIndexOrThrow("IMAGEN_REAL")));
                     fotosDp.setUbicacionSolicitada(cursor.getString(cursor.getColumnIndexOrThrow("ID_UBICACION")));
                     fotosDp.setComentarioFoto(cursor.getString(cursor.getColumnIndexOrThrow("ID_COMENTARIO")));
                     cursor.moveToNext();
@@ -133,5 +132,22 @@ public class FotosDB {
 
     }
 
+    public boolean ModificarComentarios(int id,String ubicacion,String comentario) {
+        boolean seleccion = false;
+        SQLiteDatabase sql = DBHelp.getWritableDatabase();
+        try{
+            ContentValues cv = new ContentValues();
+            cv.put("ID_UBICACION",ubicacion); //These Fields should be your String values of actual column names
+            cv.put("ID_COMENTARIO",comentario);
+            sql.update("foto_listado", cv, "ID_FOTO = ?",new String[]{ String.valueOf(id)});
+            seleccion = true;
+
+        }catch (Exception Error){
+            Error.toString();
+        }finally {
+            DBHelp.close();
+        }
+        return seleccion;
+    }
 
 }

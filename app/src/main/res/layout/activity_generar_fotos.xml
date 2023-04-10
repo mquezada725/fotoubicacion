@@ -63,6 +63,7 @@
             app:layout_constraintStart_toStartOf="@+id/ImgFotoCaptura"
             app:layout_constraintTop_toBottomOf="@+id/ImgFotoCaptura" />
 
+        <!--
         <Button
             android:id="@+id/BtnRegresar"
             android:layout_width="250dp"
@@ -78,6 +79,7 @@
             app:layout_constraintEnd_toEndOf="@+id/TxtComentario"
             app:layout_constraintStart_toStartOf="@+id/TxtComentario"
             app:layout_constraintTop_toBottomOf="@+id/TxtComentario" />
+        -->
 
         <Button
             android:id="@+id/BtnGuardarFoto"
@@ -91,24 +93,26 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/BtnRegresar"
-            app:layout_constraintStart_toStartOf="@+id/BtnRegresar"
-            app:layout_constraintTop_toBottomOf="@+id/BtnRegresar" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/BtnAccederCamara"
+            app:layout_constraintStart_toStartOf="@+id/BtnAccederCamara"
+            app:layout_constraintTop_toBottomOf="@+id/TxtComentario" />
 
         <EditText
             android:id="@+id/TxtComentario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="@color/white"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="Escriba Comentario (Opcional)"
             android:inputType="textPersonName"
-            android:backgroundTint="@color/white"
             android:textAlignment="center"
             android:textColor="#F8F7F7"
             android:textColorHint="#ECE8E8"
-            app:layout_constraintEnd_toEndOf="@+id/TxtUbicacion"
+            app:layout_constraintEnd_toEndOf="@+id/BtnGuardarFoto"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/TxtUbicacion"
             app:layout_constraintTop_toBottomOf="@+id/TxtUbicacion" />
 

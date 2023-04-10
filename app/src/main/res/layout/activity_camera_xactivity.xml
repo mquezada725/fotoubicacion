@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CameraXActivity">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="PreviewArea"
+        android:importantForAccessibility="no"/>
+
+    <TextView
+        android:id="@+id/sensor_posicionfoto"
+        android:text="00000"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linear_camara_indiscreta"
+        android:visibility="gone"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_camerax"
+            android:gravity="center"
+            android:padding="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:background="@drawable/round_button"
+                android:id="@+id/btn_back_nav_cam"
+                android:drawableTop="@drawable/ic_baseline_west_white24"
+                android:layout_marginRight="35dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </Button>
+        <Button
+            android:background="@drawable/round_button"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/btn_captura_foto"
+            android:drawableTop="@drawable/ic_white_photo_camera_44"
+            android:paddingTop="15dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp">
+        </Button>
+    </LinearLayout>
+</RelativeLayout>

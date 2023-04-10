@@ -1,11 +1,10 @@
 package com.example.fotoubicacion.Models;
 
-import android.graphics.drawable.Drawable;
-
 public class Fotos {
 
     int RegistroFoto;
-    String ImagenTomada;
+    String PathImagen;
+    byte[] ImagenReal;
     String UbicacionSolicitada;
     String ComentarioFoto;
 
@@ -17,13 +16,17 @@ public class Fotos {
         RegistroFoto = registroFoto;
     }
 
-    public String getImagenTomada() {
-        return ImagenTomada;
+    public String getPathImagen() {return PathImagen;}
+
+    public void setPathImagen(String pathimagen) {
+        PathImagen = pathimagen;
     }
 
-    public void setImagenTomada(String imagenTomada) {
-        ImagenTomada = imagenTomada;
+    public void setImagenReal(byte[] imagenReal) {
+        ImagenReal = imagenReal;
     }
+
+    public byte[] getImagenReal() {return ImagenReal;}
 
     public String getUbicacionSolicitada() {
         return UbicacionSolicitada;

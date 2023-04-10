@@ -1,31 +1,27 @@
 package com.example.fotoubicacion;
 
-import static com.example.fotoubicacion.DB.DBHelper.TABLA_FOTOS;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ListView;
 
 import com.example.fotoubicacion.Adaptadores.AdaptadorFotos;
 import com.example.fotoubicacion.DB.DBHelper;
 import com.example.fotoubicacion.DB.FotosDB;
-import com.example.fotoubicacion.Entidades.ListadoFoto;
+import com.example.fotoubicacion.Entidades.FotosModels;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EditarRecorrido extends AppCompatActivity {
 
     // Llamar clases de base de datos locales
     DBHelper BaseFotos;
-    SQLiteDatabase sqLiteDatabase;
-    // Creacion adaptador para fotos tomadas
+    SQLiteDatabase dbFotos;
     AdaptadorFotos adfotos;
     RecyclerView ListaVista;
 
@@ -39,31 +35,31 @@ public class EditarRecorrido extends AppCompatActivity {
         FotosDB db = new FotosDB(EditarRecorrido.this);
 
         BaseFotos = new DBHelper(this);
-        findID();
-        DisplayListado();
+        ListaVista = findViewById(R.id.RvListado);
         ListaVista.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-
+        DisplayListado();
     }
 
     private void DisplayListado() {
-        sqLiteDatabase = BaseFotos.getReadableDatabase();
-        Cursor Curseado = sqLiteDatabase.rawQuery(" SELECT * FROM foto_listado " ,null);
-        ArrayList<ListadoFoto> ModeloFoto = new ArrayList<>();
+        dbFotos = BaseFotos.getReadableDatabase();
+
+        Cursor Curseado = dbFotos.rawQuery(" SELECT * FROM foto_listado " ,null);
+        ArrayList<FotosModels> ModeloFoto = new ArrayList<>();
         while (Curseado.moveToNext()){
-            int IDtomar = Curseado.getInt(0);
-            byte[]ImagenFoto = Curseado.getBlob(1);
-            String UbicacionEscrita = Curseado.getString(2);
-            String ComentarioOp = Curseado.getString(3);
-            ModeloFoto.add(new ListadoFoto(IDtomar,ImagenFoto,"Ubicación Fotografia : "+UbicacionEscrita,
-                    "Comentario Foto : " +ComentarioOp));
+            int IDfoto = Curseado.getInt(0);
+            String PathFoto = Curseado.getString(1);
+            byte[] ImagenFoto = Curseado.getBlob(2);
+            if (ImagenFoto.length==0) {ImagenFoto = new byte[0];}
+            String UbicacionEscrita = Curseado.getString(3);
+            String ComentarioOp = Curseado.getString(4);
+            ModeloFoto.add(new FotosModels(IDfoto,PathFoto,ImagenFoto,UbicacionEscrita,ComentarioOp));
 
         }
         Curseado.close();
-        adfotos = new AdaptadorFotos(this,R.layout.muestrafotodato,ModeloFoto,sqLiteDatabase);
+        adfotos = new AdaptadorFotos(getApplicationContext(),R.layout.muestrafotodato,ModeloFoto);
         ListaVista.setAdapter(adfotos);
     }
 
-    private void findID() {
-        ListaVista = findViewById(R.id.RvListado);
-    }
+
+
 }

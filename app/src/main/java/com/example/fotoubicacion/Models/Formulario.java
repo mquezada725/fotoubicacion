@@ -1,14 +1,16 @@
 package com.example.fotoubicacion.Models;
 
 public class Formulario {
+
+    public int id ;
+
     public int registro ;
+
     public String Titulo_Form ;
 
     public String Fecha_Form ;
 
     public String Asociado_Evento ;
-
-    public String Numero_Evento ;
 
     public String Perdida_Servicio ;
 
@@ -28,6 +30,8 @@ public class Formulario {
 
     public String Cliente_Afectado ;
 
+    public String Referencia_Cliente ;
+
     public String Tipo_Cliente ;
 
     public String Localizacion_Falla ;
@@ -38,15 +42,9 @@ public class Formulario {
 
     public String Longitud_Dato ;
 
-    //public String Registro_Foto_Antes ;
-
-    //public String Registro_Foto_Final ;
-
     public String Registro_Medicion_Antes ;
 
     public String Registro_Medicion_Final ;
-
-    public String Cerrar_Modificacion ;
 
     public String Descripcion_Materiales ;
 
@@ -55,6 +53,12 @@ public class Formulario {
     public String Resolucion_Tabajo ;
 
     public String Observaciones ;
+
+    public int getId() { return id; }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getRegistro() {
         return registro;
@@ -86,14 +90,6 @@ public class Formulario {
 
     public void setAsociado_Evento(String asociado_Evento) {
         Asociado_Evento = asociado_Evento;
-    }
-
-    public String getNumero_Evento() {
-        return Numero_Evento;
-    }
-
-    public void setNumero_Evento(String numero_Evento) {
-        Numero_Evento = numero_Evento;
     }
 
     public String getPerdida_Servicio() {
@@ -168,6 +164,15 @@ public class Formulario {
         Cliente_Afectado = cliente_Afectado;
     }
 
+    public String getReferencia_Cliente() {
+        return Referencia_Cliente;
+    }
+
+    public void setReferencia_Cliente(String referencia_cliente) {
+        Referencia_Cliente = referencia_cliente;
+    }
+
+
     public String getTipo_Cliente() {
         return Tipo_Cliente;
     }
@@ -222,14 +227,6 @@ public class Formulario {
 
     public void setRegistro_Medicion_Final(String registro_Medicion_Final) {
         Registro_Medicion_Final = registro_Medicion_Final;
-    }
-
-    public String getCerrar_Modificacion() {
-        return Cerrar_Modificacion;
-    }
-
-    public void setCerrar_Modificacion(String cerrar_Modificacion) {
-        Cerrar_Modificacion = cerrar_Modificacion;
     }
 
     public String getDescripcion_Materiales() {

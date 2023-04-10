@@ -1,25 +1,12 @@
 package com.example.fotoubicacion;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.location.LocationRequest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,40 +14,32 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fotoubicacion.Adaptadores.AdaptadorFotos;
-import com.example.fotoubicacion.DB.DBHelper;
 import com.example.fotoubicacion.DB.FotosDB;
-import com.example.fotoubicacion.Entidades.ListadoFoto;
 import com.example.fotoubicacion.Models.Fotos;
-
-
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 public class GenerarFotos extends AppCompatActivity {
 
-    Button BtnCamaraTomar,BtnAvanzarFormulario, BtnRegresarMenu, BtnAgregarGaleria;
+    Button BtnCamaraTomar,BtnGuardarFoto, BtnRegresarMenu, BtnAgregarGaleria;
     Uri uri;
     ImageView ImgCamara;
     TextView UbicacionEscrita,Comentario;
-    OutputStream OutStream;
     FotosDB fotosDB;
     Fotos fotosget;
+    Tools tools;
+    OutputStream OutStream;
     SQLiteDatabase Sqlsolicitud;
     private static final int PLACE_PICKER_REQUEST = 1;
+    private static String FOTO_RUTA_KEY = "Key_1";
     private final int GALLERY_REQ_CODE = 1000;
-
+    private String filepath="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,30 +48,41 @@ public class GenerarFotos extends AppCompatActivity {
         BtnCamaraTomar = findViewById(R.id.BtnAccederCamara);
         ImgCamara = findViewById(R.id.ImgFotoCaptura);
         UbicacionEscrita = findViewById(R.id.TxtUbicacion);
-        BtnAvanzarFormulario = findViewById(R.id.BtnGuardarFoto);
-        BtnRegresarMenu = findViewById(R.id.BtnRegresar);
+        BtnGuardarFoto = findViewById(R.id.BtnGuardarFoto);
+      //  BtnRegresarMenu = findViewById(R.id.BtnRegresar);
         BtnAgregarGaleria = findViewById(R.id.BtnCargarGaleria);
         Comentario = findViewById(R.id.TxtComentario);
 
         getSupportActionBar().hide();
+        Bundle extras = getIntent().getExtras();
 
+        if(extras != null){
 
+            FOTO_RUTA_KEY = extras.getString("RUTA_FOTO");
+
+            //File sd = Environment.getExternalStorageDirectory();
+            //File image = new File(FOTO_RUTA_KEY, String.valueOf(UUID.randomUUID()));
+            Bitmap bitmap = BitmapFactory.decodeFile(FOTO_RUTA_KEY);
+            //BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            //Bitmap bitmap = BitmapFactory.decodeFile(image.getPath(),bmOptions);
+
+            ImgCamara.setImageBitmap(bitmap);
+        }
 
         //Boton para obtnener ubicacion
 
-
         //Boton que realiza validacion de foto, ubicacion y comentario y almacena la foto tomada
-        BtnAvanzarFormulario.setOnClickListener(new View.OnClickListener() {
+        BtnGuardarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent IntentoFormular = new Intent(GenerarFotos.this,MainActivity.class);
-
-                if(ImgCamara.getDrawable() == null || UbicacionEscrita.getText().toString().length() == 0){
-                    Toast.makeText(GenerarFotos.this, "Por Favor Agrege Una Foto o Agrege Ubicación", Toast.LENGTH_SHORT).show();
+                if(UbicacionEscrita.getText().toString().length() == 0 &&
+                                FOTO_RUTA_KEY.equals("Key_1")){
+                    Toast.makeText(GenerarFotos.this, "Por Favor Agrege Foto y Ubicación", Toast.LENGTH_SHORT).show();
                 }else{
-                    BitmapDrawable GuardarFotoDirectorio = (BitmapDrawable) ImgCamara.getDrawable();
-                    Bitmap Bitmapeado = GuardarFotoDirectorio.getBitmap();
+
+                  /*  BitmapDrawable drawtobmp = (BitmapDrawable) ImgCamara.getDrawable();
+                    Bitmap Bitmapeado = drawtobmp.getBitmap();
 
                     File ArchivoFoto = Environment.getExternalStorageDirectory();
                     File Directorio = new File(ArchivoFoto.getAbsolutePath() +"/Dcim");
@@ -101,8 +91,7 @@ public class GenerarFotos extends AppCompatActivity {
                     }
                     File Archivar = new File(Directorio, System.currentTimeMillis() + ".jpg");
                     try {
-
-                       OutStream = new FileOutputStream(Archivar);
+                        OutStream = new FileOutputStream(Archivar);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -114,19 +103,38 @@ public class GenerarFotos extends AppCompatActivity {
                     }
                     try {
                         OutStream.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         OutStream.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+/*                    try {
+                        OutStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+
+                 /*   Bitmap resizedBitmap = getResizedBitmap(Bitmapeado, 1000);
+                    ByteArrayOutputStream baOutStream = new ByteArrayOutputStream();
+                    resizedBitmap.compress(Bitmap.CompressFormat.PNG, 100, baOutStream);
+                    byte[] byteArray = baOutStream.toByteArray();*/
+
+                    //File sd = Environment.getExternalStorageDirectory();
+ /*                   File image = new File(FOTO_RUTA_KEY, String.valueOf(UUID.randomUUID()));
+                    BitmapFactory.Options bmOptions = new BitmapFactory.Options();*/
+                    Bitmap bitmap = BitmapFactory.decodeFile(FOTO_RUTA_KEY);
+
+                    //Bitmap resizedBitmap = getResizedBitmap(bitmap, 1000);
+                    ByteArrayOutputStream baOutStream = new ByteArrayOutputStream();
+                    //resizedBitmap.compress(Bitmap.CompressFormat.PNG, 100, baOutStream);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baOutStream);
+                    byte[] byteArray = baOutStream.toByteArray();
+
                     FotosDB dbfoto = new FotosDB(GenerarFotos.this);
                     try {
-                        //dbfoto.InsertarFotoDB((ImgCamara.getDrawable()),UbicacionEscrita.getText().toString(),Comentario.getText().toString());
                         Fotos fotosprueba = new Fotos();
-                        fotosprueba.setImagenTomada(Archivar.getPath());
+                        fotosprueba.setPathImagen(FOTO_RUTA_KEY);
+                        fotosprueba.setImagenReal(byteArray);
                         fotosprueba.setUbicacionSolicitada(UbicacionEscrita.getText().toString());
                         fotosprueba.setComentarioFoto(Comentario.getText().toString());
                         dbfoto.InsertarFotoDB(fotosprueba);
@@ -134,7 +142,12 @@ public class GenerarFotos extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    startActivity(IntentoFormular);
+
+                    Intent i = new Intent(MainActivity.getContext(), MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    finish();
+
                     Toast.makeText(GenerarFotos.this,"Foto Guardada Con Exito",Toast.LENGTH_SHORT).show();
                 }
 
@@ -145,8 +158,9 @@ public class GenerarFotos extends AppCompatActivity {
         BtnCamaraTomar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    CamaraLanzar.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-
+                    //CamaraLanzar.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+                Intent IntentoFoto = new Intent(GenerarFotos.this, CameraXActivity.class);
+                startActivity(IntentoFoto);
             }
         });
 
@@ -161,8 +175,10 @@ public class GenerarFotos extends AppCompatActivity {
         });
     }
 
+
+
     //Metodo para iniciar la ejecucion de la camara del dispositivo android
-    ActivityResultLauncher<Intent> CamaraLanzar = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+/*    ActivityResultLauncher<Intent> CamaraLanzar = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -170,15 +186,12 @@ public class GenerarFotos extends AppCompatActivity {
                 Bundle extra = result.getData().getExtras();
                 Bitmap ImgBitMap = (Bitmap) extra.get("data");
                 ImgCamara.setImageBitmap(ImgBitMap);
-
             }
         }
 
-    });
+    });*/
 
-
-
-
+    //RESPUESTA FOTO TOMADA DESDE GALERIA
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -187,10 +200,21 @@ public class GenerarFotos extends AppCompatActivity {
             if(requestCode == GALLERY_REQ_CODE){
                 ImgCamara.setImageURI(data.getData());
             }
-
         }
     }
 
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
 }

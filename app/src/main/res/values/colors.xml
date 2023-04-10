@@ -7,11 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
-    
+
+    <color name="my_spinner_text_color">#FCF9BE</color>
+
+    <style name="activated" parent="android:Theme.Holo">
+        <item name="android:background">@android:color/holo_green_light</item>
+    </style>
+
     <style name="RadiobuttonRojo" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@android:color/holo_red_light </item>
         <item name="android:textColorPrimary">@android:color/darker_gray </item>
-
     </style>
+
+
+
 </resources>

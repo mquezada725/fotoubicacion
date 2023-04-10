@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:padding="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/TxtHoraTerminoActividad"
+        app:layout_constraintTop_toBottomOf="@+id/TxtHoraTerminoActividad"
         tools:context=".FormularioRellenar">
 
         <TextView
@@ -31,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.051" />
+            app:layout_constraintVertical_bias="0.051" />  <!-- PORTADA -->
 
         <EditText
             android:id="@+id/TxtTitulo"
@@ -39,10 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:backgroundTint="@color/white"
             android:ems="10"
             android:fontFamily="@font/marvel"
             android:hint="Titulo"
-            android:backgroundTint="@color/white"
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="#F6F4F4"
@@ -55,17 +57,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TxtPortada" />
 
+        <TextView
+            android:id="@+id/FechaFormulario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/marvel"
+            android:text="Fecha Formulario"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTitulo"
+            app:layout_constraintStart_toStartOf="@+id/TxtTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTitulo" />  <!-- FECHA FORMULARIO -->
+
         <EditText
             android:id="@+id/TxtFechaObtenido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
             android:clickable="true"
             android:ems="10"
             android:focusable="false"
             android:fontFamily="@font/marvel"
             android:hint="DD/MM/YY"
-            android:backgroundTint="@color/white"
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="#F1EEEE"
@@ -76,24 +92,20 @@
             app:layout_constraintStart_toStartOf="@id/FechaFormulario"
             app:layout_constraintTop_toBottomOf="@+id/FechaFormulario" />
 
-        <EditText
-            android:id="@+id/TxtNumeroEvento"
-            android:layout_width="150dp"
+        <TextView
+            android:id="@+id/Supervisor"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:ems="10"
             android:fontFamily="@font/marvel"
-            android:hint="N° De Evento"
-            android:backgroundTint="@color/white"
-            android:inputType="number"
-            android:textAlignment="center"
+            android:text="Supervisor"
             android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/TxtFechaObtenido"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/TxtFechaObtenido"
-            app:layout_constraintTop_toBottomOf="@+id/TxtFechaObtenido" />
+            app:layout_constraintTop_toBottomOf="@+id/TxtFechaObtenido" />  <!-- SUPERVISOR -->
 
         <Spinner
             android:id="@+id/SpSupervisor"
@@ -102,10 +114,24 @@
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/white"
             android:textAlignment="center"
-            android:textColor="#F1EEEE"
+            android:textColor="#FCF9BE"
             app:layout_constraintEnd_toEndOf="@+id/Supervisor"
             app:layout_constraintStart_toStartOf="@+id/Supervisor"
             app:layout_constraintTop_toBottomOf="@+id/Supervisor" />
+
+        <TextView
+            android:id="@+id/Tecnico1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Tecnico de Reparación"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpSupervisor"
+            app:layout_constraintStart_toStartOf="@+id/SpSupervisor"
+            app:layout_constraintTop_toBottomOf="@+id/SpSupervisor" />  <!-- TECNICO 1 -->
 
         <Spinner
             android:id="@+id/SpTecnicoReparacion"
@@ -119,26 +145,54 @@
             app:layout_constraintStart_toStartOf="@+id/Tecnico1"
             app:layout_constraintTop_toBottomOf="@+id/Tecnico1" />
 
+        <TextView
+            android:id="@+id/Tecnico2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Tecnico de Reparacion(Opcional)"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpTecnicoReparacion"
+            app:layout_constraintStart_toStartOf="@+id/SpTecnicoReparacion"
+            app:layout_constraintTop_toBottomOf="@+id/SpTecnicoReparacion" />  <!-- TECNICO 2 -->
+
         <Spinner
             android:id="@+id/SpTecnicoReparacionOpcional"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
-            android:textAlignment="center"
             android:backgroundTint="@color/white"
+            android:textAlignment="center"
             android:textColor="#3a414a"
             app:layout_constraintEnd_toEndOf="@+id/Tecnico2"
             app:layout_constraintStart_toStartOf="@+id/Tecnico2"
             app:layout_constraintTop_toBottomOf="@+id/Tecnico2" />
+
+        <TextView
+            android:id="@+id/Zonamantenimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Zona De Mantenimiento"
+            android:textColor="#F1EEEE"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/SpTecnicoReparacionOpcional"
+            app:layout_constraintStart_toStartOf="@+id/SpTecnicoReparacionOpcional"
+            app:layout_constraintTop_toBottomOf="@+id/SpTecnicoReparacionOpcional" />  <!-- ZONA MANTENIMIENTO -->
 
         <Spinner
             android:id="@+id/SpZonaMantenimiento"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
             android:textAlignment="center"
             android:textColor="#3a414a"
-            android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/Zonamantenimiento"
             app:layout_constraintStart_toStartOf="@+id/Zonamantenimiento"
             app:layout_constraintTop_toBottomOf="@+id/Zonamantenimiento" />
@@ -155,7 +209,28 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/SpZonaMantenimiento"
             app:layout_constraintStart_toStartOf="@+id/SpZonaMantenimiento"
-            app:layout_constraintTop_toBottomOf="@+id/SpZonaMantenimiento" />
+            app:layout_constraintTop_toBottomOf="@+id/SpZonaMantenimiento" />   <!-- INICIO ACTIVIDAD -->
+
+        <EditText
+            android:id="@+id/TxtHoraInicioActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/marvel"
+            android:hint="HH:MM"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtInicioActividadP"
+            app:layout_constraintStart_toStartOf="@+id/TxtInicioActividadP"
+            app:layout_constraintTop_toBottomOf="@+id/TxtInicioActividadP" />
 
         <TextView
             android:id="@+id/TxtTerminoActividadP"
@@ -169,239 +244,28 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/TxtHoraInicioActividad"
             app:layout_constraintStart_toStartOf="@+id/TxtHoraInicioActividad"
-            app:layout_constraintTop_toBottomOf="@+id/TxtHoraInicioActividad" />
+            app:layout_constraintTop_toBottomOf="@+id/TxtHoraInicioActividad" />   <!-- TERMINO ACTIVIDAD -->
 
         <EditText
-            android:id="@+id/TxtTotalActividad"
+            android:id="@+id/TxtHoraTerminoActividad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/white"
+            android:clickable="true"
             android:ems="10"
             android:focusable="false"
             android:fontFamily="@font/marvel"
-            android:inputType="time"
-            android:textAlignment="center"
-            android:textColor="#F1EEEE"
-            android:textColorHighlight="#F3EFEF"
-            android:textColorHint="#F1EEEE"
-            android:textColorLink="#EAE7E7"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtTiempoTotal"
-            app:layout_constraintStart_toStartOf="@+id/TxtTiempoTotal"
-            app:layout_constraintTop_toBottomOf="@+id/TxtTiempoTotal" />
-
-        <Spinner
-            android:id="@+id/SpClienteAfectado"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textAlignment="center"
-            android:textColor="#F1EEEE"
-            android:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/Clienteafectado"
-            app:layout_constraintStart_toStartOf="@+id/Clienteafectado"
-            app:layout_constraintTop_toBottomOf="@+id/Clienteafectado" />
-
-        <TextView
-            android:id="@+id/TxtTipoCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/marvel"
-            android:text="Tipo Cliente"
-            android:textColor="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/SpClienteAfectado"
-            app:layout_constraintStart_toStartOf="@+id/SpClienteAfectado"
-            app:layout_constraintTop_toBottomOf="@+id/SpClienteAfectado" />
-
-        <EditText
-            android:id="@+id/TxtLocalizacionFalla"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:ems="10"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/marvel"
-            android:hint="Localización Exacta Del Trabajo"
+            android:hint="HH:MM"
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textColor="#F1EEEE"
             android:textColorHint="#F1EEEE"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/RgTipoCliente"
-            app:layout_constraintStart_toStartOf="@+id/RgTipoCliente"
-            app:layout_constraintTop_toBottomOf="@+id/RgTipoCliente" />
-
-        <TextView
-            android:id="@+id/TxtCerrarModificacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/marvel"
-            android:text="Cerrar Modificación"
-            android:textColor="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtLocalizacionFalla"
-            app:layout_constraintStart_toStartOf="@+id/TxtLocalizacionFalla"
-            app:layout_constraintTop_toBottomOf="@+id/TxtLocalizacionFalla" />
-
-        <TextView
-            android:id="@+id/TxtDescripcionMaterial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/marvel"
-            android:text="Descripción De Materiales"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/RgCerrarModificacion"
-            app:layout_constraintStart_toStartOf="@+id/RgCerrarModificacion"
-            app:layout_constraintTop_toBottomOf="@+id/RgCerrarModificacion" />
-
-        <EditText
-            android:id="@+id/TxtDescribirMateriales"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:ems="10"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/marvel"
-            android:hint="Indicar Materiales"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtDescripcionMaterial"
-            app:layout_constraintStart_toStartOf="@+id/TxtDescripcionMaterial"
-            app:layout_constraintTop_toBottomOf="@+id/TxtDescripcionMaterial" />
-
-        <TextView
-            android:id="@+id/TxtDescripcionTrabajo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/marvel"
-            android:text="Descripción Trabajo"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtDescribirMateriales"
-            app:layout_constraintStart_toStartOf="@+id/TxtDescribirMateriales"
-            app:layout_constraintTop_toBottomOf="@+id/TxtDescribirMateriales" />
-
-        <EditText
-            android:id="@+id/TxtDescribirTrabajo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/white"
-            android:ems="10"
-            android:fontFamily="@font/marvel"
-            android:hint="Indique Trabajo"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtDescripcionTrabajo"
-            app:layout_constraintStart_toStartOf="@+id/TxtDescripcionTrabajo"
-            app:layout_constraintTop_toBottomOf="@+id/TxtDescripcionTrabajo" />
-
-        <TextView
-            android:id="@+id/TxtResolucionTrabajo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/marvel"
-            android:text="Resolución Trabajo"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtDescribirTrabajo"
-            app:layout_constraintStart_toStartOf="@+id/TxtDescribirTrabajo"
-            app:layout_constraintTop_toBottomOf="@+id/TxtDescribirTrabajo" />
-
-        <EditText
-            android:id="@+id/TxtResolutivoTrabajo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:ems="10"
-            android:fontFamily="@font/marvel"
-            android:hint="Indique Resolución"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/TxtResolucionTrabajo"
-            app:layout_constraintStart_toStartOf="@+id/TxtResolucionTrabajo"
-            app:layout_constraintTop_toBottomOf="@+id/TxtResolucionTrabajo" />
-
-        <TextView
-            android:id="@+id/TxtObservacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/marvel"
-            android:text="Observaciones"
-            android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtResolutivoTrabajo"
-            app:layout_constraintStart_toStartOf="@+id/TxtResolutivoTrabajo"
-            app:layout_constraintTop_toBottomOf="@+id/TxtResolutivoTrabajo" />
-
-        <EditText
-            android:id="@+id/TxtObservacionesTexto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:ems="10"
-            android:fontFamily="@font/marvel"
-            android:hint="Indique Observación"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textColor="#F1EEEE"
-            android:backgroundTint="@color/white"
-            android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtObservacion"
-            app:layout_constraintStart_toStartOf="@+id/TxtObservacion"
-            app:layout_constraintTop_toBottomOf="@+id/TxtObservacion" />
-
-        <Button
-            android:id="@+id/BtnGuardarRecorrido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:backgroundTint="#73797d"
-            android:fontFamily="@font/marvel"
-            android:text="Guardar Recorrido"
-            android:textAlignment="center"
-            android:textColor="#ffd966"
-            android:textSize="20sp"
-            app:cornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/TxtObservacionesTexto"
-            app:layout_constraintStart_toStartOf="@+id/TxtObservacionesTexto"
-            app:layout_constraintTop_toBottomOf="@+id/TxtObservacionesTexto" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtTerminoActividadP"
+            app:layout_constraintStart_toStartOf="@+id/TxtTerminoActividadP"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTerminoActividadP" />
 
         <TextView
             android:id="@+id/TxtTiempoTotal"
@@ -416,49 +280,97 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/TxtHoraTerminoActividad"
             app:layout_constraintStart_toStartOf="@+id/TxtHoraTerminoActividad"
-            app:layout_constraintTop_toBottomOf="@+id/TxtHoraTerminoActividad" />
+            app:layout_constraintTop_toBottomOf="@+id/TxtHoraTerminoActividad" />  <!-- TIEMPO TOTAL -->
 
         <EditText
-            android:id="@+id/TxtHoraInicioActividad"
+            android:id="@+id/TxtTotalActividad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:clickable="true"
-            android:ems="10"
             android:backgroundTint="@color/white"
-            android:focusable="false"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="true"
             android:fontFamily="@font/marvel"
-            android:hint="HH:MM"
-            android:inputType="textPersonName"
+            android:inputType="time"
             android:textAlignment="center"
             android:textColor="#F1EEEE"
+            android:textColorHighlight="#F3EFEF"
             android:textColorHint="#F1EEEE"
-            android:textSize="17sp"
+            android:textColorLink="#EAE7E7"
+            app:layout_constraintEnd_toEndOf="@+id/TxtTiempoTotal"
+            app:layout_constraintStart_toStartOf="@+id/TxtTiempoTotal"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTiempoTotal" />
+
+        <TextView
+            android:id="@+id/Clienteafectado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Cliente Afectado"
+            android:textColor="#F6F5F5"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtInicioActividadP"
-            app:layout_constraintStart_toStartOf="@+id/TxtInicioActividadP"
-            app:layout_constraintTop_toBottomOf="@+id/TxtInicioActividadP" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtTotalActividad"
+            app:layout_constraintStart_toStartOf="@+id/TxtTotalActividad"
+            app:layout_constraintTop_toBottomOf="@+id/TxtTotalActividad" />  <!-- CLIENTE AFECTADO -->
 
         <EditText
-            android:id="@+id/TxtHoraTerminoActividad"
+            android:id="@+id/Txtbuscar"
+            android:layout_width="209dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:hint="Busca cliente"
+            android:inputType="text"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/SpClienteAfectado"
+            app:layout_constraintEnd_toStartOf="@+id/Btnfiltrar"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Clienteafectado" />
+
+        <Button
+            android:id="@+id/Btnfiltrar"
+            android:layout_width="35dp"
+            android:layout_height="43dp"
+            android:backgroundTint="#73797d"
+            android:fontFamily="@font/marvel"
+            android:text="..."
+            android:textAlignment="center"
+            app:rippleColor="#E53935"
+            app:strokeColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/SpClienteAfectado"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Txtbuscar" />
+
+        <Spinner
+            android:id="@+id/SpClienteAfectado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:clickable="true"
-            android:ems="10"
             android:backgroundTint="@color/white"
-            android:focusable="false"
+            android:textAlignment="textStart"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintTop_toBottomOf="@id/Txtbuscar"
+            app:layout_constraintBottom_toBottomOf="@id/TxtTipoCliente"
+            app:layout_constraintStart_toStartOf="@+id/Clienteafectado"
+            app:layout_constraintEnd_toEndOf="@+id/Clienteafectado" />
+
+        <TextView
+            android:id="@+id/TxtTipoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
-            android:hint="HH:MM"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
+            android:text="Tipo Cliente"
             android:textColor="#F1EEEE"
-            android:textColorHint="#F1EEEE"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtTerminoActividadP"
-            app:layout_constraintStart_toStartOf="@+id/TxtTerminoActividadP"
-            app:layout_constraintTop_toBottomOf="@+id/TxtTerminoActividadP" />
+            app:layout_constraintEnd_toEndOf="@+id/SpClienteAfectado"
+            app:layout_constraintStart_toStartOf="@+id/SpClienteAfectado"
+            app:layout_constraintTop_toBottomOf="@+id/SpClienteAfectado" /> <!-- TIPO CLIENTE -->
 
         <RadioGroup
             android:id="@+id/RgTipoCliente"
@@ -496,127 +408,191 @@
 
         </RadioGroup>
 
-        <RadioGroup
-            android:id="@+id/RgCerrarModificacion"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/ViewLocalizacionFalla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/marvel"
+            android:text="Localizacion de la Falla"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/RgTipoCliente"
+            app:layout_constraintStart_toStartOf="@+id/RgTipoCliente"
+            app:layout_constraintTop_toBottomOf="@+id/RgTipoCliente" />  <!-- LOCALIZACION FALLA -->
+
+        <EditText
+            android:id="@+id/TxtLocalizacionFalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:theme="@style/RadiobuttonRojo"
-            app:layout_constraintEnd_toEndOf="@+id/TxtCerrarModificacion"
-            app:layout_constraintStart_toStartOf="@+id/TxtCerrarModificacion"
-            app:layout_constraintTop_toBottomOf="@+id/TxtCerrarModificacion">
-
-            <RadioButton
-                android:id="@+id/RdCerrarModificacionSi"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:background="@color/white"
-                android:fontFamily="@font/marvel"
-                android:text="Si"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="206dp"
-                tools:layout_editor_absoluteY="1586dp" />
-
-            <RadioButton
-                android:id="@+id/RdCerrarModificacionNo"
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:background="@color/white"
-                android:fontFamily="@font/marvel"
-                android:text="No"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="277dp"
-                tools:layout_editor_absoluteY="1586dp" />
-        </RadioGroup>
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Localización Exacta Del Trabajo"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/ViewLocalizacionFalla"
+            app:layout_constraintStart_toStartOf="@+id/ViewLocalizacionFalla"
+            app:layout_constraintTop_toBottomOf="@+id/ViewLocalizacionFalla" />
 
         <TextView
-            android:id="@+id/Supervisor"
+            android:id="@+id/TxtDescripcionMaterial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
-            android:text="Supervisor"
+            android:text="Descripción De Materiales"
             android:textColor="#F1EEEE"
-            android:textSize="16sp"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtNumeroEvento"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/TxtNumeroEvento"
-            app:layout_constraintTop_toBottomOf="@+id/TxtNumeroEvento" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtLocalizacionFalla"
+            app:layout_constraintStart_toStartOf="@+id/TxtLocalizacionFalla"
+            app:layout_constraintTop_toBottomOf="@+id/TxtLocalizacionFalla" /> <!-- DESCRIPCION MATERIALES -->
+
+        <EditText
+            android:id="@+id/TxtDescribirMateriales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indicar Materiales"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescripcionMaterial"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescripcionMaterial"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescripcionMaterial" />
 
         <TextView
-            android:id="@+id/Tecnico1"
+            android:id="@+id/TxtDescripcionTrabajo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
-            android:text="Tecnico de Reparación"
+            android:text="Descripción Trabajo"
             android:textColor="#F1EEEE"
-            android:textSize="16sp"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/SpSupervisor"
-            app:layout_constraintStart_toStartOf="@+id/SpSupervisor"
-            app:layout_constraintTop_toBottomOf="@+id/SpSupervisor" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescribirMateriales"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescribirMateriales"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescribirMateriales" /> <!-- DESCRIPCION TRABAJO -->
+
+        <EditText
+            android:id="@+id/TxtDescribirTrabajo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indique Trabajo"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescripcionTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescripcionTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescripcionTrabajo" />
 
         <TextView
-            android:id="@+id/Tecnico2"
+            android:id="@+id/TxtResolucionTrabajo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
-            android:text="Tecnico de Reparacion(Opcional)"
+            android:text="Resolución Trabajo"
             android:textColor="#F1EEEE"
-            android:textSize="16sp"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/SpTecnicoReparacion"
-            app:layout_constraintStart_toStartOf="@+id/SpTecnicoReparacion"
-            app:layout_constraintTop_toBottomOf="@+id/SpTecnicoReparacion" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtDescribirTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtDescribirTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtDescribirTrabajo" /> <!-- RESOLUCION TRABAJO -->
+
+        <EditText
+            android:id="@+id/TxtResolutivoTrabajo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:fontFamily="@font/marvel"
+            android:hint="Indique Resolución"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#F1EEEE"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/TxtResolucionTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtResolucionTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtResolucionTrabajo" />
 
         <TextView
-            android:id="@+id/Zonamantenimiento"
+            android:id="@+id/TxtObservacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/marvel"
-            android:text="Zona De Mantenimiento"
+            android:text="Observaciones"
             android:textColor="#F1EEEE"
-            android:textSize="16sp"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/SpTecnicoReparacionOpcional"
-            app:layout_constraintStart_toStartOf="@+id/SpTecnicoReparacionOpcional"
-            app:layout_constraintTop_toBottomOf="@+id/SpTecnicoReparacionOpcional" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintStart_toStartOf="@+id/TxtResolutivoTrabajo"
+            app:layout_constraintTop_toBottomOf="@+id/TxtResolutivoTrabajo" /> <!-- OBSERVACIONES -->
 
-        <TextView
-            android:id="@+id/FechaFormulario"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/TxtObservacionesTexto"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/white"
+            android:ems="10"
             android:fontFamily="@font/marvel"
-            android:text="Fecha Formulario"
+            android:hint="Indique Observación"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
             android:textColor="#F1EEEE"
-            android:textSize="16sp"
+            android:textColorHint="#F1EEEE"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtTitulo"
-            app:layout_constraintStart_toStartOf="@+id/TxtTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/TxtTitulo" />
+            app:layout_constraintEnd_toEndOf="@+id/TxtObservacion"
+            app:layout_constraintStart_toStartOf="@+id/TxtObservacion"
+            app:layout_constraintTop_toBottomOf="@+id/TxtObservacion" />
 
-        <TextView
-            android:id="@+id/Clienteafectado"
+        <Button
+            android:id="@+id/BtnGuardarRecorrido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
+            android:backgroundTint="#73797d"
             android:fontFamily="@font/marvel"
-            android:text="Cliente Afectado"
-            android:textColor="#F6F5F5"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/TxtTotalActividad"
-            app:layout_constraintStart_toStartOf="@+id/TxtTotalActividad"
-            app:layout_constraintTop_toBottomOf="@+id/TxtTotalActividad" />
+            android:text="Guardar Recorrido"
+            android:textAlignment="center"
+            android:textColor="#ffd966"
+            android:textSize="20sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/TxtObservacionesTexto"
+            app:layout_constraintStart_toStartOf="@+id/TxtObservacionesTexto"
+            app:layout_constraintTop_toBottomOf="@+id/TxtObservacionesTexto" />  <!-- GUARDA RECORRIDO -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

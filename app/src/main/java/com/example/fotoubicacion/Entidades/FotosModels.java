@@ -1,22 +1,19 @@
 package com.example.fotoubicacion.Entidades;
 
-public class ListadoFoto {
-
-
+public class FotosModels {
     private int ID_foto;
-    private byte[] Foto_Tomada;
+    private String Path_Foto;
+    private byte[] Imagen_Real;
     private String UbicacionFoto;
     private String Comentario;
 
-    public ListadoFoto(int iDtomar, byte[] imagenFoto, String ubicacionEscrita, String comentarioOp) {
-        ID_foto = iDtomar;
-        Foto_Tomada = imagenFoto;
-        UbicacionFoto = ubicacionEscrita;
-        Comentario = comentarioOp;
+    public FotosModels(int iD, String pathFoto, byte[] imagenReal, String ubicacion, String comentario) {
+        ID_foto = iD;
+        Path_Foto = pathFoto;
+        Imagen_Real = imagenReal;
+        UbicacionFoto = ubicacion;
+        Comentario = comentario;
     }
-
-
-
 
     public int getID_foto() {
         return ID_foto;
@@ -42,12 +39,17 @@ public class ListadoFoto {
         Comentario = comentario;
     }
 
+    public String getPath_Foto() {return Path_Foto;}
 
-    public byte[] getFoto_Tomada() {
-        return Foto_Tomada;
+    public void setPath_Foto(String path_Foto) {
+        Path_Foto = path_Foto;
     }
 
-    public void setFoto_Tomada(byte[] foto_tomada) {
-        Foto_Tomada = Foto_Tomada;
+    public byte[] getImagen_Real() {
+        return Imagen_Real;
+    }
+
+    public void setImagen_Real(byte[] imagen_Real) {
+        Imagen_Real = imagen_Real;
     }
 }
